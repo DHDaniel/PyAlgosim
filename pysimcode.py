@@ -36,6 +36,14 @@ def init():
     return {}
 
 # the main algorithm that will be run for each stock, every day
+# This is just an example to illustrate how to use this function
+"""
+The algorithm below buys the stock AAPL if it does not already own it. It will
+buy 100 shares at the very start of the program (since it doesn't own any) and
+will hold on to these shares. Before buying the shares though, it is making sure
+that the account has enough funds to do so, in the second "if" statement. It is then
+buying the AAPL shares at the day's opening price.
+"""
 def main(account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables={}):
     if ticker == "AAPL" and ticker not in account.getStocks():
         if account.getValue() - ((100 * open_price) + transaction_fee) >= 0:
