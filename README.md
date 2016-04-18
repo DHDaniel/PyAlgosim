@@ -1,6 +1,7 @@
 
-# PySimulator
+# [PySimulator](http://dhdaniel.github.io/PySimulator)
 A stock market back-tester for algorithmic trading built in Python.
+[http://dhdaniel.github.io/PySimulator](http://dhdaniel.github.io/PySimulator)
 
 ## Getting started
 The first thing you must do on downloading the software is, from the command line (you can use any way
