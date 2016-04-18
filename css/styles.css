@@ -55,7 +55,7 @@
   padding: 0px 10px 0px 10px;
 }
 
-.page-content {
+.page-header, .page-content {
   padding-top: 2em;
   padding-bottom: 2em;
 }
