@@ -50,49 +50,75 @@
     </div>
   </header>
 
-  <div class="container">
+  <main>
+    <div class="container">
 
-    <div class="page-header">
-      <h1 class="light-blue-text">Getting started</h1>
-      <h4 class="light-blue-text">It's quick, simple and easy.</h4>
+      <div class="page-header">
+        <h1 class="light-blue-text">Getting started</h1>
+        <h4 class="light-blue-text">It's quick, simple and easy.</h4>
+      </div>
+
+      <nav class="light-blue">
+        <div class="nav-wrapper breadcrumb-wrapper">
+          <div class="col s12">
+            <a class="breadcrumb" href="index.html">Home</a>
+            <a class="breadcrumb" href="getting-started.html">Getting started</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="page-content">
+
+        <p>The first thing you must do on downloading the software is, from the command line (or using any method you want) navigate to the <code class="language-bash">utilities_and_modules</code> folder</p>
+
+        <pre><code class="language-bash">
+  $ cd /path/to/PySimulator/
+  $ cd utilities_and_modules
+            </code></pre>
+
+        <p>From that folder, run the Python program <code class="language-bash">scraper_init.py</code>.</p>
+
+        <pre><code class="language-bash">
+  $ python scraper_init.py
+        </code></pre>
+
+        <p>Running this program is necessary to create the database <code class="language-bash">stocks.db</code>, which the program <strong>will communicate with</strong>. This database does not come with the software because it is a large file, and for the sake of saving space it was not uploaded to GitHub.</p>
+
+        <h3 class="light-blue-text">Trading algorithm</h3>
+
+        <p>Once you have created the <code class="language-bash">stocks.db</code> file, you are ready to go. In the <code class="language-bash">pysimcode.py</code> file, in the main folder, is where all your algorithms and code will go. Open the file using any text editor that you like, and you will see some source code with two functions: <code class="language-bash">main()</code> and <code class="language-bash">init()</code>.</p>
+
+        <p><strong>The <code class="language-bash">init()</code> function:</strong> the purpose of this function is to initialise any variables that you may want to use during your algorithm that are not already provided. You can store these variables in the dictionary returned by this function. For example, if you wanted to keep track of the lowest ever price of the stock, you could create an entry in the dictionary under the key <code class="language-bash">"lowest"</code>, and initialise it to <code class="language-bash">0</code> in the <code class="language-bash">init()</code> function. This function is called once for every separate stock - this means these variables will be different for each ticker.</p>
+
+        <p><strong>The <code class="language-bash">main()</code> function:</strong> the <code class="language-bash">main()</code> function is what gets executed every day for each ticker. It contains the main algorithm and logic of your trading strategy. All the variables that are available for use are in the comments of the <code class="language-bash">pysimcode.py</code> file, and they are also described there. You can access the optional variables that you have created using the <code class="language-bash">optional_variables</code> variable, and looping through it (it is a dictionary).</p>
+      </div>
+
     </div>
+  </main>
 
-    <nav class="light-blue">
-      <div class="nav-wrapper breadcrumb-wrapper">
-        <div class="col s12">
-          <a class="breadcrumb" href="index.html">Home</a>
-          <a class="breadcrumb" href="getting-started.html">Getting started</a>
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m6">
+          <ul>
+            <li><a href="docs.html" class="white-text">Documentation</a></li>
+            <li><a href="getting-started.html" class="white-text">Getting started</a></li>
+            <li><a href="examples.html" class="white-text">Examples</a></li>
+            <li><a href="https://github.com/DHDaniel/PySimulator" class="white-text">GitHub</a></li>
+            <li><a href="https://github.com/DHDaniel/PySimulator/releases" class="white-text">Download</a></li>
+          </ul>
+        </div>
+        <div class="col s12 m6">
+          <p class="white-text">Cover image by <a rel="nofollow" class="white-text" href="http://www.flickr.com/photos/hutchike/">Kevin Hutchinson</a> - <a rel="nofollow" class="white-text" href="http://www.flickr.com/photos/hutchike/3880462147/">Flickr</a>, <a href="http://creativecommons.org/licenses/by/2.0" title="Creative Commons Attribution 2.0">CC BY 2.0</a></p>
         </div>
       </div>
-    </nav>
-
-    <div class="page-content">
-
-      <p>The first thing you must do on downloading the software is, from the command line (or using any method you want) navigate to the <code class="language-bash">utilities_and_modules</code> folder</p>
-
-      <pre><code class="language-bash">
-$ cd /path/to/PySimulator/
-$ cd utilities_and_modules
-          </code></pre>
-
-      <p>From that folder, run the Python program <code class="language-bash">scraper_init.py</code>.</p>
-
-      <pre><code class="language-bash">
-$ python scraper_init.py
-      </code></pre>
-
-      <p>Running this program is necessary to create the database <code class="language-bash">stocks.db</code>, which the program <strong>will communicate with</strong>. This database does not come with the software because it is a large file, and for the sake of saving space it was not uploaded to GitHub.</p>
-
-      <h3 class="light-blue-text">Trading algorithm</h3>
-
-      <p>Once you have created the <code class="language-bash">stocks.db</code> file, you are ready to go. In the <code class="language-bash">pysimcode.py</code> file, in the main folder, is where all your algorithms and code will go. Open the file using any text editor that you like, and you will see some source code with two functions: <code class="language-bash">main()</code> and <code class="language-bash">init()</code>.</p>
-
-      <p><strong>The <code class="language-bash">init()</code> function:</strong> the purpose of this function is to initialise any variables that you may want to use during your algorithm that are not already provided. You can store these variables in the dictionary returned by this function. For example, if you wanted to keep track of the lowest ever price of the stock, you could create an entry in the dictionary under the key <code class="language-bash">"lowest"</code>, and initialise it to <code class="language-bash">0</code> in the <code class="language-bash">init()</code> function. This function is called once for every separate stock - this means these variables will be different for each ticker.</p>
-
-      <p><strong>The <code class="language-bash">main()</code> function:</strong> the <code class="language-bash">main()</code> function is what gets executed every day for each ticker. It contains the main algorithm and logic of your trading strategy. All the variables that are available for use are in the comments of the <code class="language-bash">pysimcode.py</code> file, and they are also described there. You can access the optional variables that you have created using the <code class="language-bash">optional_variables</code> variable, and looping through it (it is a dictionary).</p>
     </div>
-
-  </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <p id="copyright-notice" class="white-text">Copyright Daniel Hernandez H. 2016, under the <a class="white-text" href="https://opensource.org/licenses/MIT">MIT License</a></p>
+      </div>
+    </div>
+  </footer>
 
 </body>
 
