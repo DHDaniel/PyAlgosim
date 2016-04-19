@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <title>PySimulator</title>
+
+  <!-- Tag for better mobile display -->
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+  <link href="css/materialize.min.css" type="text/css" rel="stylesheet"/>
+  <!-- For code markup -->
+  <link href="css/prism.css" type="text/css" rel="stylesheet"/>
+  <link href="css/styles.css" type="text/css" rel="stylesheet"/>
+
+  <!-- Google Material Design icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <script src="js/jquery-2.2.0.js" type="text/javascript"></script>
+  <script src="js/materialize.min.js" type="text/javascript"></script>
+  <script src="js/prism.js" type="text/javascript"></script>
+  <script src="js/script.js" type="text/javascript"></script>
+
+</head>
+
+<body>
+
+  <header>
+    <div class="navbar-fixed">
+      <nav class="orange">
+        <div class="container">
+          <div class="nav-wrapper">
+            <a href="index.html" class="brand-logo"><span class="light-blue-text">Py</span>Simulator</a>
+            <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="getting-started.html">Getting started</a></li>
+              <li class="active"><a href="docs.html">Docs</a></li>
+              <li><a href="examples.html">Examples</a></li>
+              <li><a href="https://github.com/DHDaniel/PySimulator/releases" class="btn light-blue">Download</a></li>
+            </ul>
+            <ul class="side-nav light-blue" id="mobile-nav">
+              <li><a href="getting-started.html">Getting started</a></li>
+              <li class="active"><a href="docs.html">Docs</a></li>
+              <li><a href="examples.html">Examples</a></li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+
+      <div class="page-header">
+        <h1 class="light-blue-text long-word">Documentation</h1>
+      </div>
+
+      <nav class="light-blue">
+        <div class="nav-wrapper breadcrumb-wrapper">
+          <div class="col s12">
+            <a class="breadcrumb" href="index.html">Home</a>
+            <a class="breadcrumb" href="docs.html">Documentation</a>
+          </div>
+        </div>
+      </nav>
+
+      <div class="page-content">
+
+        <h5 class="light-blue-text">PyBank.Account()</h5>
+        <p>One of the most important features of trading is actually having a trading/bank account. In PySimulator, this functionality is provided by the <code class="language-python">pybank.Account()</code> class. It has numerous functions that you can use to buy and sell stock, and it also takes into account transaction fees for you, so you don't have to worry about it. Also, it is completely customizable - you can choose how many funds to start with, the cost of transactions, etc.</p>
+
+        <p>Where you will write your code, <code class="language-bash">pysimcode.py</code>, the <code class="language-python">Account</code> class is already imported, and is accessed in the <code class="language-bash">main()</code> method as <code class="language-python">account</code>. If you wish to change the starting funds of the account ($100,000 by default) you must open the <code class="language-bash">pysim.py</code> program, and look for the <code class="language-python">Account()</code> declaration. Change the number to whatever number you wish to use.</p>
+
+        <p>To alter the transaction fee value, you must go into the <code class="language-bash">pybank.py</code> program, and alter the <code class="language-python">self.TRANSACTION_FEE</code> value.</p>
+
+        <p><strong>Warning:</strong> do not change anything else, or move these files out of place, as it may affect the program and produce errors at runtime.</p>
+
+        <h5 class="light-blue-text">Methods</h5>
+
+        <p><code class="language-python">account.getValue()</code></p>
+
+        <p>Returns the value of the account, excluding the value of the stocks - the amount of cash in your account.</p>
+
+        <p><code class="language-python">account.getTransactions()</code></p>
+
+        <p>Returns the number of transactions made by the account.</p>
+
+        <p><code class="language-python">account.getStocks()</code></p>
+
+        <p>Returns a dictionary with all the stocks owned at the time, with each key being the stock ticker, and the values being a list with two values - the <strong>quantity</strong> and the <strong>price (at which it was bought)</strong>.</p>
+
+        <p><code class="language-python">account.getTransactionFee()</code></p>
+
+        <p>Returns the current cost of transactions.</p>
+
+        <p><code class="language-python">account.buyStock(ticker, quantity, price)</code></p>
+
+        <p>Buys the specified stock, using the ticker, quantity, and the price, and stores it in the account. If the stock does not exists, or the account does not have enough funds to purchase it, it will return <code class="language-python">-1.</code></p>
+
+        <em><strong>Note:</strong> the account does not check whether the price provided is the correct one - you must provide it yourself, using the variables offered in the <code class="language-bash">pysimcode.py</code> file.</em>
+
+        <p><code class="language-python">account.sellStock(ticker, quantity, price)</code></p>
+
+        <p>Sells the specified stock, and, if all the stock owned is sold, it removes the stock from the account. The function will return <code class="language-python">-1</code> if the stock is not owned by the account, or if you are trying to sell more than what you own.</p>
+
+        <p><strong>Note:</strong> the account does not check whether the price provided is the correct one - you must provide it yourself, using the variables offered in the <code class="language-bash">pysimcode.py</code> file.</p>
+
+        <p><code class="language-python">account.sellAll(latest_prices)</code></p>
+
+        <p>Sells all the stocks in the account. This function is always called at the end of the backtesting program in order to return the profit/loss made at the end of backtesting. <code class="language-python">latest_prices</code> is a variable provided in the pysim.py program with all the last stock prices for each ticker.</p>
+
+
+      </div>
+
+    </div>
+  </main>
+
+  <footer class="page-footer orange">
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m6">
+          <ul>
+            <li><a href="docs.html" class="white-text">Documentation</a></li>
+            <li><a href="getting-started.html" class="white-text">Getting started</a></li>
+            <li><a href="examples.html" class="white-text">Examples</a></li>
+            <li><a href="https://github.com/DHDaniel/PySimulator" class="white-text">GitHub</a></li>
+            <li><a href="https://github.com/DHDaniel/PySimulator/releases" class="white-text">Download</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer-copyright">
+      <div class="container">
+        <p id="copyright-notice" class="white-text">Copyright Daniel Hernandez H. 2016, under the <a class="white-text" href="https://opensource.org/licenses/MIT">MIT License</a></p>
+      </div>
+    </div>
+  </footer>
+
+</body>
+
+</html>
