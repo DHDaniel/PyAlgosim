@@ -39,6 +39,7 @@ if __name__ == '__main__':
         for record in records:
 
             # variables that can be used in the algorithm
+            date = str(record[0])
             open_price = record[1]
             close_price = record[2]
             high = record[3]
@@ -49,7 +50,7 @@ if __name__ == '__main__':
             latest_prices[ticker] = close_price
 
             # algorithm code is run
-            pysimcode.main(account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables)
+            pysimcode.main(date, account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables)
 
 
     account.sellAll(latest_prices)

@@ -5,6 +5,7 @@
 # it will be executed EVERY DAY from 1998 to 2013 on ALL of the stocks.
 
 # VARIABLES THAT YOU CAN USE:
+# date (the date of the certain day. The format is YEARMONTHDAY, all together, e.g "19980102". Note it is a string)
 # ticker (the stock's ticker, used for purchasing or selling)
 # open_price (the stock's opening price of the day)
 # close_price (the stock's closing price of the day)
@@ -44,7 +45,7 @@ will hold on to these shares. Before buying the shares though, it is making sure
 that the account has enough funds to do so, in the second "if" statement. It is then
 buying the AAPL shares at the day's opening price.
 """
-def main(account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables={}):
+def main(date, account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables={}):
     if ticker == "AAPL" and ticker not in account.getStocks():
         if account.getValue() - ((100 * open_price) + transaction_fee) >= 0:
             account.buyStock(ticker, 100, open_price)
