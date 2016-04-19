@@ -1,14 +1,14 @@
 
-# [PySimulator](http://dhdaniel.github.io/PySimulator)
-A stock market back-tester for algorithmic trading built in Python.
-[http://dhdaniel.github.io/PySimulator](http://dhdaniel.github.io/PySimulator)
+# [PyAlgosim](http://dhdaniel.github.io/PyAlgosim)
+A simple stock market back-tester for algorithmic trading built in Python.
+[http://dhdaniel.github.io/PyAlgosim](http://dhdaniel.github.io/PyAlgosim)
 
 ## Getting started
 The first thing you must do on downloading the software is, from the command line (you can use any way
   you want) navigate to the `utilities_and_modules` folder
 
   ```
-  $ cd /path/to/PySimulator/
+  $ cd /path/to/PyAlgosim/
   $ cd utilities_and_modules
   ```
 
@@ -41,7 +41,7 @@ The first thing you must do on downloading the software is, from the command lin
   of your trading strategy. All the variables that are available for use are in the comments of the `pysimcode.py` file, and they are also described there. You can access the optional variables that you have created using the `optional_variables` variable, and looping through it (it is a dictionary).
 
 ## PyBank.Account()
-One of the most important features of trading is actually having a **trading/bank account**. In PySimulator, this functionality is provided by the `pybank.Account()` class. It has numerous functions that you can use to buy and sell stock, and it also takes into account transaction fees for you, so you don't have to worry about it. Also, it is completely customizable - you can choose how many funds to start with, the cost of transactions, etc.
+One of the most important features of trading is actually having a **trading/bank account**. In PyAlgosim, this functionality is provided by the `pybank.Account()` class. It has numerous functions that you can use to buy and sell stock, and it also takes into account transaction fees for you, so you don't have to worry about it. Also, it is completely customizable - you can choose how many funds to start with, the cost of transactions, etc.
 
 ### Using pybank.Account()
 Where you will write your code, `pysimcode.py`, the Account class is already imported, and is accessed in the `main()` method as `account`. If you wish to change the starting funds of the account (`$100,000` by default) you must open the `pysim.py` program, and look for the `Account()` declaration. Change the number to whatever number you wish to use.
