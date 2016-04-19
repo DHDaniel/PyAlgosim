@@ -24,12 +24,19 @@
   #front-page-text h1 {
     font-size: 4.5em;
   }
+  .long-word {
+    font-size: 3em;
+  }
 }
 
 /* iPhone 5 and 4 and Galaxy S5*/
 @media (max-width: 361px) {
   #front-page-text h1 {
     font-size: 3.5em;
+  }
+
+  #copyright-notice {
+    font-size: 0.75em;
   }
 }
 
