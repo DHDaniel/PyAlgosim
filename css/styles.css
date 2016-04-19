@@ -15,6 +15,10 @@
   margin-right: auto;
 }
 
+#front-page-text a {
+  font-weight: normal;
+}
+
 #front-page-text h1 {
   font-size: 6em;
 }
