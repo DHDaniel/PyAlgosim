@@ -40,42 +40,43 @@ The first thing you must do on downloading the software is, from the command lin
   The `main()` function is what gets executed every day for each ticker. It contains the main algorithm and logic
   of your trading strategy. All the variables that are available for use are in the comments of the `pysimcode.py` file, and they are also described there. You can access the optional variables that you have created using the `optional_variables` variable, and looping through it (it is a dictionary).
 
-## PyBank.Account()
+## pybank.Account()
 One of the most important features of trading is actually having a **trading/bank account**. In PyAlgosim, this functionality is provided by the `pybank.Account()` class. It has numerous functions that you can use to buy and sell stock, and it also takes into account transaction fees for you, so you don't have to worry about it. Also, it is completely customizable - you can choose how many funds to start with, the cost of transactions, etc.
 
 ### Using pybank.Account()
-Where you will write your code, `pysimcode.py`, the Account class is already imported, and is accessed in the `main()` method as `account`. If you wish to change the starting funds of the account (`$100,000` by default) you must open the `pysim.py` program, and look for the `Account()` declaration. Change the number to whatever number you wish to use.
+Where you will write your code, `pysimcode.py`, the Account class is already imported, and is accessed in the `main()` method as `account`. If you wish to change the starting funds of the account (`$100,000` by default) you must open the `pysim.py` program, and look for the `pybank.Account()` declaration. Change the number to whatever number you wish to use.
 
 To alter the transaction fee value, you must go into the `pybank.py` program, and alter the `self.TRANSACTION_FEE` value.
 
 **Warning**: do not change anything else, or move these files out of place, as it may affect the program and produce errors at runtime.
 
+## Accessing properties
+#### `account.funds`
+The value of the account, excluding the value of the stocks - the amount of cash in your account.
+
+#### `account.transactions`
+The number of transactions made by the account.
+
+#### `account.stocks_owned`
+
+A dictionary with all the stocks owned at the time, with each key being the stock ticker, and the values being a list with two values - the **quantity** and the **price (at which it was bought)**.
+
+#### `account.TRANSACTION_FEE`
+The current cost of transactions.
+
 ## Methods
 
-#### `account.getValue()`
-Returns the value of the account, excluding the value of the stocks - the amount of cash in your account.
-
-#### `account.getTransactions()`
-Returns the number of transactions made by the account.
-
-#### `account.getStocks()`
-
-Returns a dictionary with all the stocks owned at the time, with each key being the stock ticker, and the values being a list with two values - the **quantity** and the **price (at which it was bought)**.
-
-#### `account.getTransactionFee()`
-Returns the current cost of transactions.
-
-#### `account.buyStock(ticker, quantity, price)`
+#### `account.buy_stock(ticker, quantity, price)`
 Buys the specified stock, using the ticker, quantity, and the price, and stores it in the account. If the stock does not exists, or the account does not have enough funds to purchase it, it will return `-1`.
 
 _**Note**: the account does not check whether the price provided is the correct one - you must provide it yourself, using the variables offered in the `pysimcode.py` file._
 
-#### `account.sellStock(ticker, quantity, price)`
+#### `account.sell_stock(ticker, quantity, price)`
 Sells the specified stock, and, if all the stock owned is sold, it removes the stock from the account. The function will return `-1` if the stock is not owned by the account, or if you are trying to sell more than what you own.
 
 _**Note**: the account does not check whether the price provided is the correct one - you must provide it yourself, using the variables offered in the `pysimcode.py` file._
 
-#### `account.sellAll(latest_prices)`
+#### `account.sell_all(latest_prices)`
 Sells all the stocks in the account. This function is always called at the end of the backtesting program in order to return the profit/loss made at the end of backtesting. `latest_prices` is a variable provided in the `pysim.py` program with all the last stock prices for each ticker.
 
 
