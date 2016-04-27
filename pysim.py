@@ -51,8 +51,8 @@ if __name__ == '__main__':
             latest_prices[ticker] = close_price
 
             # algorithm code is run
-            pysimcode.main(date, account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables)
-
+            pysimcode.main(date, account, ticker, open_price, close_price,
+                           high, low, vol, transaction_fee, optional_variables)
 
     account.sell_all(latest_prices)
 

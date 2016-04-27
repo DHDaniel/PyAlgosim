@@ -60,5 +60,6 @@ class Account:
     def sell_all(self, latest_prices):
         copy = self.stocks_owned
         for ticker, val in copy.items():
-            self.funds += (self.stocks_owned[ticker][0] * latest_prices[ticker]) - self.TRANSACTION_FEE
+            self.funds += (self.stocks_owned[ticker][0] *
+                           latest_prices[ticker]) - self.TRANSACTION_FEE
             del self.stocks_owned[ticker]

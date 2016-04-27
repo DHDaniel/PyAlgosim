@@ -37,7 +37,8 @@ for csv in os.listdir(basepath):
 
         # SQL command to create new tables. Quotes around ticker
         # to escape key words (e.g ALL)
-        sql_command = "CREATE TABLE " + "'" + ticker + "'" + " (date INTEGER UNIQUE, open REAL, close REAL, high REAL, low REAL, volume REAL)"
+        sql_command = "CREATE TABLE " + "'" + ticker + "'" + \
+            " (date INTEGER UNIQUE, open REAL, close REAL, high REAL, low REAL, volume REAL)"
 
         cur.execute(sql_command)
 
@@ -55,9 +56,11 @@ for csv in os.listdir(basepath):
             volume = line[6]
 
             # again escaping the ticker
-            sql_insert = "INSERT INTO " + "'" + ticker + "'" + " VALUES (?, ?, ?, ?, ?, ?) "
+            sql_insert = "INSERT INTO " + "'" + ticker + \
+                "'" + " VALUES (?, ?, ?, ?, ?, ?) "
 
-            cur.execute(sql_insert, (date, open_val, close_val, high, low, volume) )
+            cur.execute(sql_insert, (date, open_val,
+                                     close_val, high, low, volume))
 
         conn.commit()
 
