@@ -1,7 +1,8 @@
 
-from utilities_and_modules.pybank import Account
 import sqlite3
 import json
+
+from utilities_and_modules import pybank
 import pysimcode
 
 
@@ -17,8 +18,8 @@ if __name__ == '__main__':
 
     # initiating account with 100,000
     # CHANGE THAT VALUE IF YOU WANT TO
-    account = Account(100000)
-    start_val = account.getValue()
+    account = pybank.Account(100000)
+    start_val = account.funds
 
     latest_prices = {}
 
@@ -45,7 +46,7 @@ if __name__ == '__main__':
             high = record[3]
             low = record[4]
             vol = record[5]
-            transaction_fee = account.getTransactionFee()
+            transaction_fee = account.TRANSACTION_FEE
 
             latest_prices[ticker] = close_price
 
@@ -53,12 +54,13 @@ if __name__ == '__main__':
             pysimcode.main(date, account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables)
 
 
-    account.sellAll(latest_prices)
+    account.sell_all(latest_prices)
 
+    # Printing account status
     print account
 
-    profit = account.getValue() - start_val
+    profit = account.funds - start_val
     profit_per = round(profit / start_val * 100, 2)
 
     print "Profit: " + str(round(profit, 2)) + " (" + str(profit_per) + ")"
-    print "Transactions: " + str(account.getTransactions())
+    print "Transactions: " + str(account.transactions)

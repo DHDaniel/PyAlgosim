@@ -20,8 +20,8 @@
 # the "init" section. The "init" function will be called for every separate ticker
 
 # HOW TO PURCHASE/SELL
-# To purchase or sell any stocks: account.sellStock(ticker, quantity_desired, price)
-# OR account.buyStock(ticker, quantity_desired, price). Note that "ticker" is already provided
+# To purchase or sell any stocks: account.sell_stock(ticker, quantity_desired, price)
+# OR account.buy_stock(ticker, quantity_desired, price). Note that "ticker" is already provided
 # to you as a variable, but you must provide the quantity desired and the price. For price,
 # you should use any of the price-related variables provided above. "account" will
 # perform erroneously if you attempt to sell stock you don't own, or more than you
@@ -46,6 +46,6 @@ that the account has enough funds to do so, in the second "if" statement. It is 
 buying the AAPL shares at the day's opening price.
 """
 def main(date, account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables={}):
-    if ticker == "AAPL" and ticker not in account.getStocks():
-        if account.getValue() - ((100 * open_price) + transaction_fee) >= 0:
-            account.buyStock(ticker, 100, open_price)
+    if ticker == "AAPL" and ticker not in account.stocks_owned:
+        if account.funds - ((100 * open_price) + transaction_fee) >= 0:
+            account.buy_stock(ticker, 100, open_price)

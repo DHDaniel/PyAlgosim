@@ -9,6 +9,11 @@
 
 class Account:
 
+    """A simple trading account for use in PyAlgosim
+
+    :param funds: the starting funds of the account, e.g 100,000
+    """
+
     def __init__(self, funds):
 
         # funds to work with and transaction number
@@ -28,19 +33,7 @@ class Account:
         return_str += "Stocks owned: " + str(self.stocks_owned)
         return return_str
 
-    def getValue(self):
-        return self.funds
-
-    def getTransactions(self):
-        return self.transactions
-
-    def getStocks(self):
-        return self.stocks_owned
-
-    def getTransactionFee(self):
-        return self.TRANSACTION_FEE
-
-    def buyStock(self, ticker, quantity, price):
+    def buy_stock(self, ticker, quantity, price):
         # checking funds are available
         if self.funds - ((quantity * price) + self.TRANSACTION_FEE) >= 0:
             self.funds -= ((quantity * price) + self.TRANSACTION_FEE)
@@ -49,7 +42,7 @@ class Account:
         else:
             return -1
 
-    def sellStock(self, ticker, quantity, current_price):
+    def sell_stock(self, ticker, quantity, current_price):
         try:
             # checking if quantity is owned
             if self.stocks_owned[ticker][0] - quantity >= 0:
@@ -64,7 +57,7 @@ class Account:
             return -1
 
     # sells all stocks owned
-    def sellAll(self, latest_prices):
+    def sell_all(self, latest_prices):
         copy = self.stocks_owned
         for ticker, val in copy.items():
             self.funds += (self.stocks_owned[ticker][0] * latest_prices[ticker]) - self.TRANSACTION_FEE
