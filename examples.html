@@ -80,9 +80,9 @@
 
         <pre><code class="language-python">
 def main(account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables={}):
-    if ticker == "AAPL" and ticker not in account.getStocks():
-        if account.getValue() - ((100 * open_price) + transaction_fee) >= 0:
-            account.buyStock(ticker, 100, open_price)
+    if ticker == "AAPL" and ticker not in account.stocks_owned:
+        if account.funds - ((100 * open_price) + transaction_fee) >= 0:
+            account.buy_stock(ticker, 100, open_price)
         </code></pre>
 
         <h5 class="light-blue-text">
@@ -101,9 +101,9 @@ def init():
 # the main algorithm that will be run for each stock, every day
 # This is just an example to illustrate how to use this function
 def main(account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables={}):
-    if ticker not in account.getStocks():
-        if account.getValue() - ((100 * open_price) + transaction_fee) >= 0:
-            account.buyStock(ticker, 100, open_price)
+    if ticker not in account.stocks_owned:
+        if account.funds - ((100 * open_price) + transaction_fee) >= 0:
+            account.buy_stock(ticker, 100, open_price)
     if high > optional_variables["highest-ever"]:
         optional_variables["highest-ever"] = high
         </code></pre>
