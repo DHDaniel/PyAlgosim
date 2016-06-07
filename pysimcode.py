@@ -51,7 +51,7 @@ buying the AAPL shares at the day's opening price.
 """
 
 
-def main(date, account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables={}):
+def main(date, account, ticker, current_price, high, low, vol, transaction_fee, optional_variables={}):
     if ticker == "AAPL" and ticker not in account.stocks_owned:
-        if account.funds - ((100 * open_price) + transaction_fee) >= 0:
-            account.buy_stock(ticker, 100, open_price)
+        if account.funds - ((100 * current_price) + transaction_fee) >= 0:
+            account.buy_stock(ticker, 100)

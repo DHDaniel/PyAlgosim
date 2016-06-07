@@ -25,6 +25,9 @@ if __name__ == '__main__':
 
     for ticker in ticker_list:
         records = cur.execute("SELECT * FROM " + '"' + str(ticker) + '";')
+
+        # latest prices looks like:
+        # { ticker : price, ticker : price }
         latest_prices[ticker] = 0
 
         # variables for algorithm
@@ -48,13 +51,20 @@ if __name__ == '__main__':
             vol = record[5]
             transaction_fee = account.TRANSACTION_FEE
 
-            latest_prices[ticker] = close_price
+            # running algorithm at open
+            latest_prices[ticker] = open_price
+            account.update(latest_prices)
+            pysimcode.main(date, account, ticker, open_price,
+                           high, low, vol, transaction_fee, optional_variables)
+            # end of algorithm
 
-            # algorithm code is run
-            pysimcode.main(date, account, ticker, open_price, close_price,
+            # running algorithm at close
+            latest_prices[ticker] = close_price
+            account.update(latest_prices)
+            pysimcode.main(date, account, ticker, close_price,
                            high, low, vol, transaction_fee, optional_variables)
 
-    account.sell_all(latest_prices)
+    account.sell_all()
 
     # Printing account status
     print account
