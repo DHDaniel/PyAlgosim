@@ -115,15 +115,20 @@ class Account:
                     self.stocks_owned[ticker]["bought_p"] = average_bought_p
 
             else:
-                raise ValueError("You do not have enough funds to make this purchase")
+                raise ValueError("You do not have enough funds to make this purchase:", ticker,
+                                price, quantity, self)
 
+        # outputting error values
         except ValueError as e:
-            print e
+            print "ERROR:", type(e)
+            print e.args[0], "Buy", e.args[1], "*", e.args[3], "at", e.args[2]
+            print "Funds in account:", e.args[4].funds
+            quit()
 
     def sell_stock(self, ticker, quantity):
         try:
             if ticker not in self.stocks_owned:
-                raise KeyError("You do not own the stock you are trying to sell.")
+                raise KeyError("You do not own the stock you are trying to sell:", ticker)
 
             if quantity == "all":
                 quantity = self.stocks_owned[ticker]["quantity"]
@@ -137,14 +142,23 @@ class Account:
                 if self.stocks_owned[ticker]["quantity"] == 0:
                     del self.stocks_owned[ticker]
             else:
-                raise ValueError("You cannot sell more stock than what you own.")
+                raise ValueError("You cannot sell more stock than what you own.", ticker,
+                                quantity, self)
             self.transactions += 1
-        # if this happens, it is probably due to the account not having
-        # the stock that it is trying to sell
+
+        # selling more stock than what is owned
         except ValueError as e:
-            print e
+            print "ERROR:", type(e)
+            print e.args[0]
+            print "Attempting to sell:", e.args[2], "shares of", e.args[1]
+            print "Shares owned:", e.args[3].stocks_owned[e.args[1]]["quantity"]
+            quit()
+
+        # selling stock which you don't own
         except KeyError as e:
-            print e
+            print "ERROR:", type(e)
+            print e.args[0], e.args[1]
+            quit()
 
     def trailing_stop(self, ticker, quantity, points, percentage=False):
 
@@ -172,7 +186,8 @@ class Account:
                 # if you try to sell more than what you own
                 if (self.stocks_owned[ticker]["options"]["trailing_stop"]["quantity"] >
                     self.stocks_owned[ticker]["quantity"]):
-                    raise ValueError("You can't sell more stock than what you own.")
+                    raise ValueError("You cannot sell more stock than what you own.", ticker,
+                                    quantity, self)
 
                 if percentage:
                     # converting to percentage
@@ -184,8 +199,13 @@ class Account:
             else:
                 return -1
 
+        # selling more stock than what is owned
         except ValueError as e:
-            print e
+            print "ERROR:", type(e)
+            print e.args[0]
+            print "Attempting to sell:", e.args[2], "shares of", e.args[1]
+            print "Shares owned:", e.args[3].stocks_owned[e.args[1]]["quantity"]
+            quit()
 
     def sell_all(self):
         """Sells all stocks owned"""
