@@ -47,9 +47,8 @@ The algorithm below buys the stock AAPL if it does not already own it. It will
 buy 100 shares at the very start of the program (since it doesn't own any) and
 will hold on to these shares. Before buying the shares though, it is making sure
 that the account has enough funds to do so, in the second "if" statement. It is then
-buying the AAPL shares at the day's opening price.
+buying the AAPL shares at the day's current price.
 """
-
 
 def main(date, account, ticker, current_price, high, low, vol, transaction_fee, optional_variables={}):
     if ticker == "AAPL" and ticker not in account.stocks_owned:

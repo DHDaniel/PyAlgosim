@@ -6,13 +6,6 @@
 # AUTHOR: Daniel Hernandez H.
 # LICENSE: MIT License (https://opensource.org/licenses/MIT)
 
-"""
-CHANGES:
-    API for buying and selling stock (including "all")
-    trailing_stop function
-    string representation
-"""
-
 ### HELPER FUNCTIONS ###
 
 def update_trailing_stop(account, ticker):
@@ -69,7 +62,6 @@ class Account:
         # for the update() function to easily access.
         self.stocks_owned = {}
 
-    # TO DO = UPDATE STRING REPRESENTATION TO REPRESENT STOCKS AND PROFIT PER TRADE
     def __str__(self):
         return_str = ""
         return_str += "Funds in account: " + str(round(self.funds, 2)) + "\n"
