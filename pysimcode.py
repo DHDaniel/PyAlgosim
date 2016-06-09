@@ -7,8 +7,7 @@
 # VARIABLES THAT YOU CAN USE:
 # date (the date of the certain day. The format is YEARMONTHDAY, all together, e.g "19980102". Note it is a string)
 # ticker (the stock's ticker, used for purchasing or selling)
-# open_price (the stock's opening price of the day)
-# close_price (the stock's closing price of the day)
+# current_price (the stock's current price)
 # high (the stock's high price of the day)
 # low (the stock's low price of the day)
 # vol (the stock's volume)
@@ -21,22 +20,19 @@
 # separate ticker
 
 # HOW TO PURCHASE/SELL
-# To purchase or sell any stocks: account.sell_stock(ticker, quantity_desired, price)
-# OR account.buy_stock(ticker, quantity_desired, price). Note that "ticker" is already provided
-# to you as a variable, but you must provide the quantity desired and the price. For price,
-# you should use any of the price-related variables provided above. "account" will
-# perform erroneously if you attempt to sell stock you don't own, or more than you
-# own. Refer to the pybank.py documentation.
+# To purchase or sell any stocks: account.sell_stock(ticker, quantity_desired)
+# OR account.buy_stock(ticker, quantity_desired). Note that "ticker" is already provided
+# to you as a variable, but you must provide the quantity desired. "account" will
+# raise errors if you attempt to sell stock you don't own, or more than you
+# own. Refer to the pybank.py documentation for these errors, on the website.
 
 # REMEMBER
 # remember to take into account your funds - you cannot continue buying
-# forever, or the account will throw an error. Refer to the documentation of
-# pybank
-
-# should RETURN a dictionary of optional variables, if needed
-
+# forever, or the account will raise an error.
 
 def init():
+
+    # should RETURN a dictionary of optional variables, if needed
     return {}
 
 # the main algorithm that will be run for each stock, every day
