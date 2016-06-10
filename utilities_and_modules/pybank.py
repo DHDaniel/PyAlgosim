@@ -117,6 +117,10 @@ class Account:
             print "Funds in account:", e.args[4].funds
             quit()
 
+        except:
+            print "ERROR: the stock you tried to buy does not exist."
+            quit()
+
     def sell_stock(self, ticker, quantity):
         try:
             if ticker not in self.stocks_owned:
@@ -189,7 +193,7 @@ class Account:
 
             # if account doesn't have enough money to execute
             else:
-                return -1
+                raise IndexError("You do not have enough funds to place this order.")
 
         # selling more stock than what is owned
         except ValueError as e:
@@ -197,6 +201,10 @@ class Account:
             print e.args[0]
             print "Attempting to sell:", e.args[2], "shares of", e.args[1]
             print "Shares owned:", e.args[3].stocks_owned[e.args[1]]["quantity"]
+            quit()
+
+        except IndexError as e:
+            print e.args[0]
             quit()
 
     def sell_all(self):
