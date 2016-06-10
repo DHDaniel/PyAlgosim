@@ -75,14 +75,14 @@
         <p>The algorithm below buys the stock AAPL if it does not already own it. It will
         buy 100 shares at the very start of the program (since it doesn't own any) and
         will hold on to these shares. Before buying the shares though, it is making sure
-        that the account has enough funds to do so, in the second "if" statement. Remember, <code class="language-python">account</code> will return -1 if it does not have enough funds to execute the trade, and will not buy any stock - it is important that <strong>you check this yourself</strong>. It is then
-        buying the AAPL shares at the day's opening price. Remember, price is also provided by you.</p>
+        that the account has enough funds to do so, in the second "if" statement. Remember, <code class="language-python">account</code> will raise an error if it does not have enough funds to execute the trade, and the program will quit. It is important that <strong>you check this yourself</strong>. It is then
+        buying the AAPL shares at the current price.</p>
 
         <pre><code class="language-python">
-def main(account, ticker, open_price, close_price, high, low, vol, transaction_fee, optional_variables={}):
+def main(account, ticker, current_price, high, low, vol, transaction_fee, optional_variables={}):
     if ticker == "AAPL" and ticker not in account.stocks_owned:
-        if account.funds - ((100 * open_price) + transaction_fee) >= 0:
-            account.buy_stock(ticker, 100, open_price)
+        if account.funds - ((100 * current_price) + transaction_fee) >= 0:
+            account.buy_stock(ticker, 100)
         </code></pre>
 
         <h5 class="light-blue-text">
@@ -90,7 +90,7 @@ def main(account, ticker, open_price, close_price, high, low, vol, transaction_f
         </h5>
 
         <p>
-          This algorithm will buy 100 shares from each company if it doesn't already own them. If you run this algorithm, notice that it stops at 26 transactions (in the end, it doesn't end up buying shares from the 500 companies). This is because it has run out of money to purchase them, and so the transaction doesn't go through. The algorithm also demonstrates the use of the <code class="language-python">init()</code> function. It keeps track of the highest recorded price ever for the stock, and then, through a small tweak in the <code class="language-python">pysim.py</code> file, it prints it out for each stock.
+          This algorithm will buy 100 shares from each company if it doesn't already own them. If you run this algorithm, notice that it stops at 26 transactions (in the end, it doesn't end up buying shares from the 500 companies). This is because it has run out of money to purchase them, and so the transaction doesn't go through. However, note that this has been done by the algorithm, <strong>not</strong> the program - if you attempt to buy shares but your account doesn't have sufficient funds, the program will raise an error and quit. The algorithm also demonstrates the use of the <code class="language-python">init()</code> function. It keeps track of the highest recorded price ever for the stock, and then, through a small tweak in the <code class="language-python">pysim.py</code> file, it prints it out for each stock.
         </p>
 
         <pre><code class="language-python">
