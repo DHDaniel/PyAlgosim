@@ -24,7 +24,7 @@
 # OR account.buy_stock(ticker, quantity_desired). Note that "ticker" is already provided
 # to you as a variable, but you must provide the quantity desired. "account" will
 # raise errors if you attempt to sell stock you don't own, or more than you
-# own. Refer to the pybank.py documentation for these errors, on the website.
+# own. Refer to the PyBank.py documentation for these errors, on the website.
 
 # REMEMBER
 # remember to take into account your funds - you cannot continue buying

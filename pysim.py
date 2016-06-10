@@ -2,7 +2,7 @@
 import sqlite3
 import json
 
-from utilities_and_modules import pybank
+from utilities_and_modules import PyBank
 import pysimcode
 
 
@@ -18,7 +18,7 @@ if __name__ == '__main__':
 
     # initiating account with 100,000
     # CHANGE THAT VALUE IF YOU WANT TO
-    account = pybank.Account(100000)
+    account = PyBank.Account(100000)
     start_val = account.funds
 
     latest_prices = {}
