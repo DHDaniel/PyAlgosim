@@ -114,9 +114,19 @@
 
         <p>Sells the specified stock, and, if all the stock owned is sold, it removes the stock from the account. The function will raise an error if the stock is not owned by the account, or if you are trying to sell more than what you own, and quit. The parameter <code class="language-python">quantity</code> can be either a numeric value, like <code class="language-python">100</code>, or the string <code class="language-python">"all"</code>, indicating the program to sell all of the stock owned.</p>
 
+        <p><code class="language-python">account.trailing_stop(ticker, quantity, points, percentage=False)</code></p>
+
+        <p>
+          Begins a sell trailing stop order for the ticker provided and the quantity stated. The variable <code class="language-python">points</code> indicates the tolerance of the order (how much you want to allow it to go down before selling), and <code class="language-python">percentage</code> indicated whether <code class="language-python">points</code> should be read as a percentage or as points. By default, it is set to False. If you attempt to sell more stock than what you own, an error will be raised and the program will quit.
+        </p>
+
+        <p>
+          <strong>Note:</strong> if you place two trailing stop orders for the <em>same</em> stock (e.g placing a trailing stop for 100 shares of AAPL and then placing the same order again), the quantity will be accumulated (e.g now the order will be for 200 shares of AAPL) and the <code class="language-python">points</code> variable will be <strong>replaced by the last value provided.</strong>
+        </p>
+
         <p><code class="language-python">account.sell_all()</code></p>
 
-        <p>Sells all the stocks in the account. This function is always called at the end of the backtesting program in order to return the profit/loss made at the end of backtesting.
+        <p>Sells all the stocks in the account. This function is always called at the end of the backtesting program in order to return the profit/loss made at the end of backtesting.</p>
 
       </div>
 
