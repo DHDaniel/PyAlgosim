@@ -18,6 +18,7 @@ if __name__ == '__main__':
 
     # initiating account with default value of 100,000
     # CHANGE THAT VALUE IF YOU WANT TO
+    # e.g PyBank.Account(10000) for $10,000
     account = PyBank.Account()
     start_val = account.funds
 
