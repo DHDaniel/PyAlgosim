@@ -42,7 +42,7 @@ class Account:
     :param funds: the starting funds of the account, e.g 100,000
     """
 
-    def __init__(self, funds):
+    def __init__(self, funds=100000):
 
         # funds to work with and transaction number
         self.funds = funds

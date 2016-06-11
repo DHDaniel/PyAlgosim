@@ -16,9 +16,9 @@ if __name__ == '__main__':
 
     ticker_list = json.loads(ticker_list)
 
-    # initiating account with 100,000
+    # initiating account with default value of 100,000
     # CHANGE THAT VALUE IF YOU WANT TO
-    account = PyBank.Account(100000)
+    account = PyBank.Account()
     start_val = account.funds
 
     latest_prices = {}
