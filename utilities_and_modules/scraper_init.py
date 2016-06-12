@@ -16,60 +16,64 @@ import json
 # path to access stock quote files
 basepath = "../raw_data/daily/"
 
-# connect with database
-conn = sqlite3.connect("stocks.db")
-cur = conn.cursor()
+def generateDB():
+    # connect with database
+    conn = sqlite3.connect("stocks.db")
+    cur = conn.cursor()
 
-# for reference later on
-ticker_list = []
+    # for reference later on
+    ticker_list = []
 
-# loop through all the .csv files in the directory with raw data
-for csv in os.listdir(basepath):
-    if csv.endswith(".csv"):
-        # extracts the stock ticker from filename
-        ticker = (csv[csv.index("_") + 1:csv.index(".")]).upper()
+    # loop through all the .csv files in the directory with raw data
+    for csv in os.listdir(basepath):
+        if csv.endswith(".csv"):
+            # extracts the stock ticker from filename
+            ticker = (csv[csv.index("_") + 1:csv.index(".")]).upper()
 
-        ticker_list.append(ticker)
+            ticker_list.append(ticker)
 
-        print "Processing", ticker, "..."
+            print "Processing", ticker, "..."
 
-        fh = open(basepath + csv)
+            fh = open(basepath + csv)
 
-        # SQL command to create new tables. Quotes around ticker
-        # to escape key words (e.g ALL)
-        sql_command = "CREATE TABLE " + "'" + ticker + "'" + \
-            " (date INTEGER UNIQUE, open REAL, close REAL, high REAL, low REAL, volume REAL)"
+            # SQL command to create new tables. Quotes around ticker
+            # to escape key words (e.g ALL)
+            sql_command = "CREATE TABLE " + "'" + ticker + "'" + \
+                " (date INTEGER UNIQUE, open REAL, close REAL, high REAL, low REAL, volume REAL)"
 
-        cur.execute(sql_command)
+            cur.execute(sql_command)
 
-        for line in fh:
+            for line in fh:
 
-            line = line.strip().split(",")
+                line = line.strip().split(",")
 
-            # grabbing data we need from CSV file
-            date = line[0]
-            # skipping index 1 because it is not needed
-            open_val = line[2]
-            high = line[3]
-            low = line[4]
-            close_val = line[5]
-            volume = line[6]
+                # grabbing data we need from CSV file
+                date = line[0]
+                # skipping index 1 because it is not needed
+                open_val = line[2]
+                high = line[3]
+                low = line[4]
+                close_val = line[5]
+                volume = line[6]
 
-            # again escaping the ticker
-            sql_insert = "INSERT INTO " + "'" + ticker + \
-                "'" + " VALUES (?, ?, ?, ?, ?, ?) "
+                # again escaping the ticker
+                sql_insert = "INSERT INTO " + "'" + ticker + \
+                    "'" + " VALUES (?, ?, ?, ?, ?, ?) "
 
-            cur.execute(sql_insert, (date, open_val,
-                                     close_val, high, low, volume))
+                cur.execute(sql_insert, (date, open_val,
+                                         close_val, high, low, volume))
 
-        conn.commit()
+            conn.commit()
 
-        print ticker, "done"
+            print ticker, "done"
 
-ticker_json = json.dumps(ticker_list, indent=4)
+    ticker_json = json.dumps(ticker_list, indent=4)
 
-json_file = open("tickers.json", "w")
+    json_file = open("tickers.json", "w")
 
-json_file.write(ticker_json)
+    json_file.write(ticker_json)
 
-json_file.close()
+    json_file.close()
+
+if __name__ == '__main__':
+    generateDB()
