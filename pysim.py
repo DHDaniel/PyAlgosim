@@ -5,9 +5,7 @@ import json
 from utilities_and_modules import PyBank
 import pysimcode
 
-
-if __name__ == '__main__':
-
+def main():
     # connecting to database
     conn = sqlite3.connect('utilities_and_modules/stocks.db')
     cur = conn.cursor()
@@ -75,3 +73,7 @@ if __name__ == '__main__':
 
     print "Profit: " + str(round(profit, 2)) + " (" + str(profit_per) + ")"
     print "Transactions: " + str(account.transactions)
+
+
+if __name__ == '__main__':
+    main()
