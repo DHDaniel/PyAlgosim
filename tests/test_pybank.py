@@ -56,6 +56,25 @@ class PyBankTestCase(unittest.TestCase):
 
         self.assertTrue(len(self.account.stocks_owned) == 0, "Stock was not sold properly.")
 
+    def test_trailing_stop_points(self):
+        self.account.buy_stock("AAPL", 100)
+        self.account.trailing_stop("AAPL", 50, 40)
+
+        self.account.update(self.test_data[1])
+
+        self.assertTrue(len(self.account.stocks_owned["AAPL"]["options"]) > 0, "Trailing stop order was not registered in options.")
+
+        self.account.trailing_stop("AAPL", 50, 30)
+        self.account.update(self.test_data[2])
+
+        self.assertTrue(len(self.account.stocks_owned) == 0, "Stock was not sold and is still in account.")
+
+    def test_sell_all_stock(self):
+        self.account.buy_stock("AAPL", 100)
+        self.account.sell_all()
+
+        self.assertTrue(len(self.account.stocks_owned) == 0, "Stocks were not properly sold.")
+
 
 # running tests
 suite = unittest.TestLoader().loadTestsFromTestCase(PyBankTestCase)
