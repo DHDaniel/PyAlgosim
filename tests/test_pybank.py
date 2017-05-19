@@ -7,7 +7,7 @@ import os
 parent_path = os.path.dirname(os.getcwd())
 sys.path.append(parent_path)
 
-from utilities_and_modules import PyBank
+import PyBank
 
 
 class PyBankTestCase(unittest.TestCase):

@@ -4,5 +4,5 @@
 *.pyc
 
 # the database does not need to be committed and it is too large
-utilities_and_modules/stocks.db
+*.db
 
