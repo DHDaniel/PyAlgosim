@@ -94,13 +94,12 @@ class Account:
                         "quantity": quantity, "bought_p": price, "current_p": price, "options" : {}}
                 else:
                     # for calculating averaged price
-                    old_amount = (self.stocks_owned[ticker]["quantity"] *
-                                  self.stocks_owned[ticker]["bought_p"])
+                    old_amount = (self.stocks_owned[ticker]["quantity"] * self.stocks_owned[ticker]["bought_p"])
                     new_amount = quantity * price
 
+                    # TODO: Fix average bought price. Doesn't look right.
                     # calculating average bought price
-                    average_bought_p = float((old_amount + new_amount) /
-                                            (self.stocks_owned[ticker]["quantity"] + quantity))
+                    average_bought_p = float((old_amount + new_amount) / (self.stocks_owned[ticker]["quantity"] + quantity))
 
                     # updating stock holding values
                     self.stocks_owned[ticker]["quantity"] += quantity

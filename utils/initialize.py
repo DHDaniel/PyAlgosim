@@ -1,10 +1,5 @@
 
-# This script is to scrape all the data off the CSV files. It should be run after
-# reset.py, as there will be a conflict between existing tables if it is not.
-# The script creates a database with the name "stocks.db" with all the info for
-# accessing later.
-# Script also generates a "tickers.json" file containing all the tickers used.
-# This is for looping through the different tables in the db later.
+# This script is to scrape all the data off the CSV files. It should be run after reset.py, as there will be a conflict between existing tables if it is not. The script creates a database with the name "stocks.db" with all the info for accessing later. Script also generates a "tickers.json" file containing all the tickers used. This is for looping through the different tables in the db later.
 
 # AUTHOR: Daniel Hernandez H.
 # LICENSE: MIT License (https://opensource.org/licenses/MIT)
@@ -25,6 +20,7 @@ def generateDB():
     ticker_list = []
 
     # loop through all the .csv files in the directory with raw data
+    # 'csv' variable is the actual filename
     for csv in os.listdir(basepath):
         if csv.endswith(".csv"):
             # extracts the stock ticker from filename

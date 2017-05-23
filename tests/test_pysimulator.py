@@ -14,6 +14,9 @@ class PySimulatorTestCase(unittest.TestCase):
     def test_db_connections(self):
         self.assertRaises(Exception, PySimulator.PySimulator, PyBank.Account(), "gibberish")
 
+        pysim = PySimulator.PySimulator(PyBank.Account(), "test.db")
+        self.assertRaises(IOError, pysim._disconnect_DB)
+
 
 
 
