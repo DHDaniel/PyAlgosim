@@ -104,12 +104,12 @@ class PySimulator:
 
             # updating internal prices of trading account to reflect actual selling and buying values
             self.latest_prices[stock_data["ticker"]] = open_price
-            self.account.update(self.latest_prices)
+            self.account.update(self.latest_prices, stock_data["ticker"])
 
             algorithm(stock_data, self.account, variables_copy)
 
             self.latest_prices[stock_data["ticker"]] = close_price
-            self.account.update(self.latest_prices)
+            self.account.update(self.latest_prices, stock_data["ticker"])
             stock_data["price"] = close_price
 
             algorithm(stock_data, self.account, variables_copy)

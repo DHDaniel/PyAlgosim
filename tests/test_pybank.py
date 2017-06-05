@@ -17,7 +17,7 @@ class PyBankTestCase(unittest.TestCase):
         self.start_funds = self.account.funds
         self.fee = self.account.TRANSACTION_FEE
         self.test_data = [{"AAPL" : 120.00}, {"AAPL" : 110.00}, {"AAPL" : 90.00}]
-        self.account.update(self.test_data[0])
+        self.account.update(self.test_data[0], "AAPL")
 
     def tearDown(self):
         del self.account
@@ -35,7 +35,7 @@ class PyBankTestCase(unittest.TestCase):
 
     def test_buy_multiple_stock(self):
         self.account.buy_stock("AAPL", 100)
-        self.account.update(self.test_data[1])
+        self.account.update(self.test_data[1], "AAPL")
         self.account.buy_stock("AAPL", 100)
 
         current_p = self.account.stocks_owned["AAPL"]["current_p"]
@@ -60,12 +60,12 @@ class PyBankTestCase(unittest.TestCase):
         self.account.buy_stock("AAPL", 100)
         self.account.trailing_stop("AAPL", 50, 40)
 
-        self.account.update(self.test_data[1])
+        self.account.update(self.test_data[1], "AAPL")
 
         self.assertTrue(len(self.account.stocks_owned["AAPL"]["options"]) > 0, "Trailing stop order was not registered in options.")
 
         self.account.trailing_stop("AAPL", 50, 30)
-        self.account.update(self.test_data[2])
+        self.account.update(self.test_data[2], "AAPL")
 
         self.assertTrue(len(self.account.stocks_owned) == 0, "Stock was not sold and is still in account.")
 
@@ -74,6 +74,19 @@ class PyBankTestCase(unittest.TestCase):
         self.account.sell_all()
 
         self.assertTrue(len(self.account.stocks_owned) == 0, "Stocks were not properly sold.")
+
+    def test_value(self):
+        self.account.buy_stock("AAPL", 100)
+        self.assertEqual(100 * 120.00, self.account.value(), "Stock value does not match the value of shares bought.")
+
+        # update prices
+        self.account.update(self.test_data[1], "AAPL")
+
+        self.account.buy_stock("AAPL", 100)
+
+        # price has now changed
+        self.assertEqual((200 * 110.00), self.account.value(), "Stock value does not match the value of shares bought (multiple purchases).")
+
 
 
 # running tests

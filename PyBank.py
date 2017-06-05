@@ -6,6 +6,8 @@
 # AUTHOR: Daniel Hernandez H.
 # LICENSE: MIT License (https://opensource.org/licenses/MIT)
 
+import copy
+
 ### HELPER FUNCTIONS ###
 
 def update_trailing_stop(account, ticker):
@@ -46,6 +48,7 @@ class Account:
 
         # funds to work with and transaction number
         self.funds = funds
+        self.initial_funds = funds
         self.transactions = 0
 
         self.TRANSACTION_FEE = 6.99
@@ -55,6 +58,7 @@ class Account:
         # the price you want to buy the stock at, making the API simpler to
         # use.
         self.latest_prices = {}
+        self.original_prices = {}
 
         # stocks_owned is in the form
         # { "AAPL" : {"quantity" : 100, "bought_p" : 110.56, "current_p" : 132.00, "options" : {} }}}
@@ -68,11 +72,19 @@ class Account:
         return_str += "Stocks owned: " + str(self.stocks_owned)
         return return_str
 
-    def update(self, latest_prices):
+    def update(self, latest_prices, ticker):
         """Vital function updates all the stock prices of the account.
         Furthermore, it also takes care of automated trades like a trailing stop.
+
+        The 'ticker' parameter is only used to update the "original prices" list.
         """
+
+        # if it is the first time updating prices for the specific ticker, create an "original prices" dictionary. This is to calculate the overall market return when producing the report.
+        if ticker not in self.original_prices:
+            self.original_prices[ticker] = latest_prices[ticker]
+
         self.latest_prices = latest_prices
+
         for ticker, info in self.stocks_owned.items():
             if ticker in self.latest_prices:
                 # updating the price of the current stock
@@ -97,7 +109,6 @@ class Account:
                     old_amount = (self.stocks_owned[ticker]["quantity"] * self.stocks_owned[ticker]["bought_p"])
                     new_amount = quantity * price
 
-                    # TODO: Fix average bought price. Doesn't look right.
                     # calculating average bought price
                     average_bought_p = float((old_amount + new_amount) / (self.stocks_owned[ticker]["quantity"] + quantity))
 
@@ -214,3 +225,63 @@ class Account:
                            self.stocks_owned[ticker]["current_p"]) - self.TRANSACTION_FEE
             self.transactions += 1
             del self.stocks_owned[ticker]
+
+    def report(self, verbose=False):
+        """
+        Provides a report of the trading activities during the period. The report is based on the starting funds, current funds, and the stocks currently owned at the time. It shows the profit made, profit on individual stocks (only stocks owned at the time), number of transactions, etc.
+
+        verbose tells the method whether to return the stocks owned at the time and the percentage gain of them.
+        """
+
+        return_str = ""
+
+        account_worth = self.funds + self.value()
+        profit = account_worth - self.initial_funds
+        profit_percentage = float(profit / self.initial_funds)
+
+        # showing absolute profit
+        return_str += "\nReturn: ${:,.2f}".format(profit)
+        return_str += "\n\n"
+
+        # showing percentage profit
+        return_str += "Return (percentage): {:.2%}".format(profit_percentage)
+        return_str += "\n\n"
+
+
+        # calculating the average market return by figuring out the return of buying one of every stock at beginning of time period. Yes, this is different from the S&P 500 data but it's the best I could do. I don't have the market capitalization data needed to simulate the S&P 500 index.
+        total_price = 0
+        total_return = 0
+
+        for stock, price in self.original_prices.items():
+            total_price += price
+            total_return += (self.latest_prices[stock] - price)
+
+        return_str += "Average market return (see docs for information on how this is calculated): {:.2%}".format(float(total_return / total_price))
+        return_str += "\n\n"
+
+        if verbose:
+            return_str += "Stocks held:\n"
+            for stock, info in self.stocks_owned.items():
+                average_return = float((info["current_p"] - info["bought_p"]) / info["bought_p"])
+
+                return_str += "{} - Qty: {} Purchase price: ${:,.2f} Avg return: {:.2%}".format(stock, info["quantity"], info["bought_p"], average_return)
+
+
+                return_str += "\n"
+
+        return_str += "\n"
+        return_str += "Number of transactions: {}".format(self.transactions)
+
+        return return_str
+
+
+
+    def value(self):
+        """
+        Returns the value of the stocks currently owned.
+        """
+        total_value = 0
+        for stock, info in self.stocks_owned.items():
+            total_value += info["quantity"] * info["current_p"]
+
+        return total_value
