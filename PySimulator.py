@@ -5,6 +5,7 @@ import sqlite3
 import os
 import copy
 import json
+import PyBank
 
 # helper functions
 def normalize_date(datetime_date):
@@ -24,20 +25,21 @@ def normalize_date(datetime_date):
 
 class PySimulator:
 
-    def __init__(self, account, path, optional_variables=None):
+    def __init__(self, account, db_path="./utils/stocks.db", ticker_list_path="./utils/tickers.json", variables=None):
         """
         Takes in the path to a database with stock information. Preferably an absolute path.
         """
-        self.database = path
+        self.database = db_path
         self.account = account
         self.connection = None
         self.cursor = None
-        self.variables = optional_variables
+        self.variables = variables
         self.latest_prices = {}
+        self.ticker_list_path = ticker_list_path
 
         # loading up the ticker list created from generating the database. The path must be correct.
         try:
-            self.ticker_list = open("./utils/tickers.json").read()
+            self.ticker_list = open(self.ticker_list_path).read()
             self.ticker_list = json.loads(self.ticker_list)
         except:
             raise IOError("The tickers.json file could not be loaded. Please make sure that you have generated the database with the initialize script, and that you are running PySimulator from its original location.")
@@ -45,6 +47,9 @@ class PySimulator:
         # verify that database is not empty (wrong path may have created a new database)
         if os.path.isfile(self.database) != True:
             raise Exception("The path entered is not the correct database file. Please make sure to run initialize.py to create the stock database, and point to the correct location.")
+
+        if not isinstance(self.account, PyBank.Account):
+            raise TypeError("Account is not a PyBank account. Please read the documentation.")
 
 
     def __str__(self):
