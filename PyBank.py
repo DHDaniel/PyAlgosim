@@ -44,14 +44,14 @@ class Account:
     :param funds: the starting funds of the account, e.g 100,000
     """
 
-    def __init__(self, funds=100000):
+    def __init__(self, funds=100000, transaction_fee=6.99):
 
         # funds to work with and transaction number
         self.funds = funds
         self.initial_funds = funds
         self.transactions = 0
 
-        self.TRANSACTION_FEE = 6.99
+        self.TRANSACTION_FEE = transaction_fee
 
         # dictionary will house all the latest prices of all the stocks,
         # making it easier to buy and sell stock. You won't need to provide
