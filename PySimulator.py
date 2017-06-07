@@ -103,8 +103,7 @@ class PySimulator:
             stock_data = {
                 "date" : stock_record[0],
                 "price" : open_price,
-                "ticker" : ticker,
-                "transaction_fee" : self.account.TRANSACTION_FEE
+                "ticker" : ticker
             }
 
             # updating internal prices of trading account to reflect actual selling and buying values
