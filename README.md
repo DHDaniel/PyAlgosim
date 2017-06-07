@@ -1,92 +1,95 @@
-# [PyAlgosim](http://dhdaniel.github.io/PyAlgosim)
+# [PyAlgosim](http://dhdaniel.github.io/PyAlgosim/)
+#### The Python-built algorithmic backtester
 
-A simple stock market back-tester for algorithmic trading built in Python. <http://dhdaniel.github.io/PyAlgosim>
 
-## Getting started
+# Getting started
+To get started using the PyAlgosim algorithmic trading backtester, you must download the most recent version of the software. You can easily do this by either cloning the repository from GitHub [here](https://github.com/DHDaniel/PyAlgosim) or directly download the latest release from [here](https://github.com/DHDaniel/PyAlgosim/releases).
 
-The first thing you must do on downloading the software is, from the command line (you can use any way you want) navigate to the `utilities_and_modules` folder
+## Requirements
+All that is required to start using PyAlgosim is:
+- Python 2.7.X
 
+## Project structure
+On downloading, the project has a very specific structure that you should keep for everything to work as intended. Alternatively, you could set up your own structure, but it would require additional configuration (and would probably be a pain). After initialization, the project structure should look like this:
+
+```bash
+.
+├── LICENSE
+├── PyBank.py
+├── PySimulator.py
+├── README.md
+├── raw_data/
+├── tests/
+└── utils/
+    ├── __init__.py
+    ├── initialize.py
+    ├── reset.py
+    ├── stocks.db
+    └── tickers.json
 ```
-  $ cd /path/to/PyAlgosim/
-  $ cd utilities_and_modules
-```
+What's inside `tests/` and `raw_data/` is not very important. However, note that the `initialize.py` script accesses the `raw_data/` directory to build the database, so you should keep this structure as is.
 
-From that folder, run the Python program `scraper_init.py`.
+For PyAlgosim to work, the project structure **should stay like this**. If you move the `stocks.db` file or the `tickers.json` file, you will need to reference them during the creation of a PySimulator object.
 
-```
-  $ python scraper_init.py
-```
+The program in which you wish to use the `Pysimulator` and `PyBank` modules in should ideally reside in the top-level directory of the project (that is, in the same directory as the PyBank and PySimulator files) for everything to run as smoothly as possible.
 
-Running this program is necessary to create the database `stocks.db`, which the program will communicate with. This database does _not_ come with the software because it is a large file, and for the sake of saving space it was not uploaded to GitHub.
+## Initialization
+To get PyAlgosim working, you must initialize the project from the directory in which you have placed it. **All the backtesting that you wish to do should be done from within this directory**, as specified later on in the documentation.
 
-## Trading algorithm
+Initialization is required to create the database file which will hold all the stock information, and to create the ticker list that the backtester will use throughout the simulations. To initialize PyAlgosim, go to the command line and type the following commands:
 
-Once you have created the `stocks.db` file, you are ready to go. In the `pysimcode.py` file, in the main folder, is where all your algorithms and code will go. Open the file using your favourite text editor, and you will see some source code with _two functions:_ `main()` and `init()`.
-
-### The init() function
-
-The purpose of this function is to initialise any variables that you may want to use during your algorithm that are not already provided. You can store these variables in the dictionary returned by this function. For example, if you wanted to keep track of the lowest ever price of the stock, you could create an entry in the dictionary under the key `"lowest"`, and initialise it to `0` in the init() function. This function is called _once_ for every separate stock - this means these variables will be different for each ticker.
-
-### The main() function
-
-The `main()` function is what gets executed every day for each ticker. It contains the main algorithm and logic of your trading strategy. All the variables that are available for use are in the comments of the `pysimcode.py` file, and they are also described there. You can access the optional variables that you have created using the `optional_variables` variable, and looping through it (it is a dictionary).
-
-## PyBank.Account()
-
-One of the most important features of trading is actually having a **trading/bank account**. In PyAlgosim, this functionality is provided by the `PyBank.Account()` class. It has numerous functions that you can use to buy and sell stock, and it also takes into account transaction fees for you, so you don't have to worry about it. Also, it is completely customizable - you can choose how many funds to start with, the cost of transactions, etc.
-
-### Using PyBank.Account()
-
-Where you will write your code, `pysimcode.py`, the Account class is already imported, and is accessed in the `main()` method as `account`. If you wish to change the starting funds of the account (`$100,000` by default) you must open the `pysim.py` program, and look for the `PyBank.Account()` declaration. Change the number to whatever number you wish to use.
-
-To alter the transaction fee value, you must go into the `PyBank.py` program, and alter the `self.TRANSACTION_FEE` value.
-
-**Warning**: do not change anything else, or move these files out of place, as it may affect the program and produce errors at runtime.
-
-## Accessing properties
-
-### `account.funds`
-
-The value of the account, excluding the value of the stocks - the amount of cash in your account.
-
-### `account.transactions`
-
-The number of transactions made by the account.
-
-### `account.stocks_owned`
-
-A dictionary with all the stocks owned at the time, with each key being the stock ticker, and the values being a list with two values - the **quantity** and the **price (at which it was bought)**.
-
-### `account.TRANSACTION_FEE`
-
-The current cost of transactions.
-
-## Methods
-
-### `account.buy_stock(ticker, quantity)`
-
-Buys the specified stock, using the ticker and quantity and stores it in the account. If the stock does not exist, or the account does not have enough funds to purchase it, it will raise an error.
-
-### `account.sell_stock(ticker, quantity)`
-
-Sells the specified stock, and, if all the stock owned is sold, it removes the stock from the account. The function will raise an error if the stock is not owned by the account, or if you are trying to sell more than what you own, and quit. The parameter quantity can be either a numeric value, like 100, or the string "all", indicating the program to sell all of the stock owned.
-
-### `account.trailing_stop(ticker, quantity, points, percentage=False)`
-
-Begins a sell trailing stop order for the ticker provided and the quantity stated. The variable points indicates the tolerance of the order (how much you want to allow it to go down before selling), and percentage indicated whether points should be read as a percentage or as points. By default, it is set to False. If you attempt to sell more stock than what you own, an error will be raised and the program will quit.
-
-**_Note_**: if you place two trailing stop orders for the _same_ stock (e.g placing a trailing stop for 100 shares of AAPL and then placing the same order again), the quantity will be accumulated (e.g now the order will be for 200 shares of AAPL) and the points variable will be **replaced by the last value provided**.
-
-### `account.sell_all()`
-
-Sells all the stocks in the account. This function is always called at the end of the backtesting program in order to return the profit/loss made at the end of backtesting.
-
-## Outcome
-
-Once you have included everything you want to in the `main()` and `init()` functions, you can run the `pysim.py` program (_not_ the `pysimcode.py` file), like so:
-
-```
-  $ python pysim.py
+```bash
+$ cd ~/path/to/PyAlgosim
+$ cd ./utils/
+$ python initialize.py
 ```
 
-It will backtest every single stock in the S&P 500 from 1998 to 2013 using the algorithm you have provided, and will then print out the result of your trades.
+That should run the initialization script, which will use the `raw_data` directory to generate the required files. Once it is done, you can start using PyAlgosim!
+
+### Why is initialization necessary?
+The database file that PyAlgosim uses to backtest algorithms is too big to upload to GitHub, so the project generates the database file during initialization, using raw .csv files which are much smaller.
+
+## PyAlgosim, the simulator
+PyAlgosim is the module that takes care of running the algorithm that you wish to backtest. Using it is very simple and intuitive. First, you must import the module into your program - **note that your program should be created in the same directory as the PyAlgosim.py file for the program to properly communicate with the generated database and ticker file**.
+
+```python
+import PyAlgosim
+```
+
+### The PyAlgosim API
+#### PyAlgosim.PyAlgosim(_account_, [_db_path_, _ticker_list_path_, _variables_])
+This method initializes the PyAlgosim simulator. It returns an object that will function as the backtester for your algorithm.
+
+**account** - a PyBank object. The trading account that you wish to use during the simulator.
+**db_path** (optional) - the path to the database file you are using. Should be a `string`. If you used the initialize.py script and are running the program from PyAlgosim.py 's directory, then you shouldn't have to set this explicitly. Defaults to `./utils/stocks.db`.
+**ticker_list_path** (optional) - the path to the ticker list file that should have been generated during the initialize.py script. Should be a `string`. Again, if you followed the initial setup instructions, you shouldn't have to explicitly set this. Defaults to `./utils/tickers.json`.
+**variables** (optional) - an dictionary "template" (dictionary with empty fields) with any optional variables that you want your algorithm to have access to during the simulation. For example, the dictionary could store recurring averages, statistics, record highs and lows, etc. Defaults to `None`.
+
+For example:
+```python
+import PySimulator
+import PyBank
+
+trade_account = PyBank.Account()
+
+# this will use all of the default configuration, assuming all files have been kept in their original place
+backtester = PySimulator.PySimulator(trade_account)
+
+# this uses custom configuration for the stock database and the ticker list json file
+backtester = PySimulator.PySimulator(trade_account, db_path="/some/other/path/mydata.db", ticker_list_path="/some/other/path/mytickers.json")
+
+# this uses a variables dictionary, for potentially calculating a simple moving average for 50 days and the highest and lowest prices of the stock. Note that it is a "template" in the sense that it is empty - it will be provided exactly like that at the start of backtesting each stock.
+my_variables = {
+    highest_price = 0
+    lowest_price = 0
+    past_50_prices = []
+}
+backtester = PySimulator.PySimulator(trade_account, variables=my_variables)
+```
+
+#### _class_ PyAlgosim.simulate(_algorithm_[, _time_start_, _time_end_])
+This method performs the backtesting on the algorithm provided, using the data specified in `time_start` and `time_end`.
+
+**algorithm** - the name of the algorithm (function) that you wish to backtest. The function provided as an algorithm must take in the following variables in the order specified:
+- A **stock data** dictionary that contains information about the stock being processed. The object will contain the following properties:
+    -
