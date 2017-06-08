@@ -175,12 +175,11 @@ class Account:
 
         try:
             if self.funds - self.TRANSACTION_FEE >= 0:
-                self.transactions += 1
-                self.funds -= self.TRANSACTION_FEE
+                # no costs are incurred here, as the transaction will be charged during the sale of the stock. This avoids charging a transaction fee twice.
 
                 if "trailing_stop" not in self.stocks_owned[ticker]["options"]:
                     self.stocks_owned[ticker]["options"] = {"trailing_stop" :
-                     {"percentage" : False, "points" : points, "highest" : self.stocks_owned[ticker]["current_p"],
+                     {"percentage" : percentage, "points" : points, "highest" : self.stocks_owned[ticker]["current_p"],
                      "quantity" : quantity}}
 
                 # if order already exists, then they will be merged into one using
@@ -198,7 +197,6 @@ class Account:
                 if percentage:
                     # converting to percentage
                     points = points / 100.0
-                    self.stocks_owned[ticker]["options"]["trailing_stop"]["percentage"] = True
                     self.stocks_owned[ticker]["options"]["trailing_stop"]["points"] = points
 
             # if account doesn't have enough money to execute

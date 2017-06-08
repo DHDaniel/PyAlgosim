@@ -23,7 +23,7 @@ def normalize_date(datetime_date):
     return int(yearstring + monthstring + daystring)
 
 
-class PySimulator:
+class PyAlgosim:
 
     def __init__(self, account, db_path="./utils/stocks.db", ticker_list_path="./utils/tickers.json", variables=None):
         """
@@ -42,7 +42,7 @@ class PySimulator:
             self.ticker_list = open(self.ticker_list_path).read()
             self.ticker_list = json.loads(self.ticker_list)
         except:
-            raise IOError("The tickers.json file could not be loaded. Please make sure that you have generated the database with the initialize script, and that you are running PySimulator from its original location.")
+            raise IOError("The tickers.json file could not be loaded. Please make sure that you have generated the database with the initialize script, and that you are running PyAlgosim from its original location.")
 
         # verify that database is not empty (wrong path may have created a new database)
         if os.path.isfile(self.database) != True:
@@ -63,7 +63,7 @@ class PySimulator:
 
     def _connect_DB(self):
         """
-        Helper function that connects to the DB. Adds a connection object and cursor object to the PySimulator object.
+        Helper function that connects to the DB. Adds a connection object and cursor object to the PyAlgosim object.
         """
         self.connection = sqlite3.connect(self.database)
         self.cursor = self.connection.cursor()
@@ -123,7 +123,7 @@ class PySimulator:
         """
         Function that simulates the algorithm on data. Takes in an algorithm (function) that it will run, and optional times to start and end (timeframes within the data's range).
 
-        The algorithm should take in an object (which contains the date, open price, close price, high, low, and volume), an "account" variable which will be the PyBank account passed in to the PySimulator object, and an "optional variables" object (which will be the initial object passed in to the PySimulator object)
+        The algorithm should take in an object (which contains the date, open price, close price, high, low, and volume), an "account" variable which will be the PyBank account passed in to the PyAlgosim object, and an "optional variables" object (which will be the initial object passed in to the PyAlgosim object)
         """
 
         # connecting to database
