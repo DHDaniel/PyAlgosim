@@ -1,0 +1,88 @@
+@import url('https://fonts.googleapis.com/css?family=Josefin+Sans|Roboto');
+
+
+$accent-color : #00e676;
+$white : #f5f5f5;
+
+// general classes
+.accent-color {
+  color: $accent-color;
+}
+
+.btn, .btn-large {
+  background-color: $accent-color;
+  &:hover {
+    background-color: darken($accent-color, 10%);
+  }
+}
+
+
+#navbar {
+  position: fixed;
+  z-index: 100;
+  height: 80px;
+  top: 0px;
+  left: 0px;
+  padding: 0px 20px;
+  width: 100%;
+  text-align: right;
+
+  color: $white;
+  background-color: transparent;
+
+  border: none;
+  box-shadow: none;
+
+
+  #logo {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0px 10px;
+    float: left;
+  }
+
+  ul {
+    display: inline-block;
+    width: auto;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+
+    li {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      a {
+        font-size: 1.1rem;
+      }
+    }
+  }
+}
+
+#landing {
+  width: 100%;
+  min-height: 700px;
+  padding: 200px 50px 50px;
+  background-color: #212121;
+  position: relative;
+
+  #landing-text {
+    color: $white;
+  }
+
+  #terminal-screen {
+    position: absolute;
+    right: 40px;
+    bottom: 0px;
+    width: 35%;
+    min-height: (520 / 600) * 35vw; // keeping aspect ratio of background image
+    background-image: url("../images/computer.svg");
+    background-size: 100%;
+  }
+}
