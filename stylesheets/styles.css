@@ -70,19 +70,56 @@
 /* line 76, ../sass/styles.scss */
 #landing #landing-text {
   color: #f5f5f5;
+  position: relative;
+  z-index: 10;
 }
-/* line 80, ../sass/styles.scss */
+/* line 82, ../sass/styles.scss */
 #landing #terminal-screen {
   position: absolute;
   right: 40px;
   bottom: 0px;
-  width: 35%;
+  min-width: 250px;
+  width: 35vw;
   min-height: 30.33333vw;
   background-image: url("../images/computer.svg");
   background-size: 100%;
   z-index: 2;
 }
-/* line 91, ../sass/styles.scss */
+/* line 104, ../sass/styles.scss */
+#landing #terminal-screen #tickers {
+  width: 30.8vw;
+  min-width: 220px;
+  height: 17.5vw;
+  margin-top: 1.95192vw;
+  margin-left: 1.86667vw;
+  background-color: #404040;
+}
+/* line 117, ../sass/styles.scss */
+#landing #terminal-screen #tickers table {
+  height: 100%;
+  font-size: 0.94231vw;
+}
+/* line 120, ../sass/styles.scss */
+#landing #terminal-screen #tickers table tr {
+  height: 16.66%;
+}
+/* line 122, ../sass/styles.scss */
+#landing #terminal-screen #tickers table tr td, #landing #terminal-screen #tickers table tr th {
+  padding: 0px 8px;
+  vertical-align: middle;
+  text-align: center;
+  font-weight: bold;
+  color: #f5f5f5;
+}
+/* line 129, ../sass/styles.scss */
+#landing #terminal-screen #tickers table tr th {
+  font-size: 1.1em;
+}
+/* line 132, ../sass/styles.scss */
+#landing #terminal-screen #tickers table tr td.ticker {
+  text-align: left;
+}
+/* line 140, ../sass/styles.scss */
 #landing #volume-bars {
   position: absolute;
   bottom: 0px;
