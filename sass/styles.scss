@@ -71,6 +71,7 @@ $white : #f5f5f5;
   padding: 200px 50px 50px;
   background-color: #212121;
   position: relative;
+  overflow: hidden;
 
   #landing-text {
     color: $white;
@@ -84,5 +85,15 @@ $white : #f5f5f5;
     min-height: (520 / 600) * 35vw; // keeping aspect ratio of background image
     background-image: url("../images/computer.svg");
     background-size: 100%;
+    z-index: 2;
+  }
+
+  #volume-bars {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 180px;
+    width: auto;
+    z-index: 1;
   }
 }

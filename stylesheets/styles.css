@@ -65,12 +65,13 @@
   padding: 200px 50px 50px;
   background-color: #212121;
   position: relative;
+  overflow: hidden;
 }
-/* line 75, ../sass/styles.scss */
+/* line 76, ../sass/styles.scss */
 #landing #landing-text {
   color: #f5f5f5;
 }
-/* line 79, ../sass/styles.scss */
+/* line 80, ../sass/styles.scss */
 #landing #terminal-screen {
   position: absolute;
   right: 40px;
@@ -79,4 +80,14 @@
   min-height: 30.33333vw;
   background-image: url("../images/computer.svg");
   background-size: 100%;
+  z-index: 2;
+}
+/* line 91, ../sass/styles.scss */
+#landing #volume-bars {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+  height: 180px;
+  width: auto;
+  z-index: 1;
 }
