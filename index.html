@@ -21,7 +21,7 @@
 <body>
 
   <nav id="navbar">
-    <a href="#" id="logo">Logo</a>
+    <a href="#" id="logo"><img src="images/paslogo.svg" /></a>
     <ul>
       <li>
         <a href="#">Getting started</a>
@@ -47,6 +47,7 @@
             <div id="landing-text">
               <h1><span class="accent-color">PyAlgosim</span>, the algorithmic stock trading backtester.</h1>
               <a class="waves-effect waves-light btn-large">Get started</a>
+              <a class="waves-effect waves-light btn-large dark-bg">View on GitHub</a>
             </div>
 
           </div>
@@ -173,12 +174,40 @@
     </div>
   </header>
 
+  <div id="first-wrapper">
+    <div id="time">
+      <h3 id="backtesting">Backtesting <span>...</span></h3>
+      <div id="clock-image-container">
+        <img src="images/clock/clock.svg" id="clock" alt="Timer clock"/>
+        <img src="images/clock/hourhand.svg" id="hourhand" aria-hidden="true"/>
+        <img src="images/clock/minutehand.svg" id="minutehand" aria-hidden="true"/>
+        <img src="images/clock/center.svg" id="center" aria-hidden="true"/>
+      </div>
+    </div>
+    <div class="container">
+      <div class="row">
+        <div class="col s12 m6 offset-m6">
+          <div id="introduction">
+            <h2>Awesome stuff.</h2>
+            <hr class="separator" />
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 
     <script src="js/jquery-2.2.0.js" type="text/javascript"></script>
     <script src="js/materialize.min.js" type="text/javascript"></script>
 
     <script src="js/TweenMax.min.js" type="text/javascript"></script>
-    <script src="js/script.js" type="text/javascript"></script>
+    <script src="js/scrollmagic/uncompressed/ScrollMagic.js" type="text/javascript"></script>
+    <script src="js/scrollmagic/uncompressed/plugins/animation.gsap.js" type="text/javascript"></script>
+    <script src="js/scrollmagic/uncompressed/plugins/debug.addIndicators.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
 </body>
 
 </html>
