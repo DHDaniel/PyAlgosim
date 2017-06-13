@@ -1,0 +1,99 @@
+#landing {
+  width: 100%;
+  min-height: 700px;
+  padding: 200px 50px 50px;
+  background-color: $black;
+  background-image: url("../images/background.png");
+  background-size: cover;
+  position: relative;
+  // hiding the volume bars, mainly
+  overflow: hidden;
+
+  #landing-text {
+    color: $white;
+    // to put a z-index on it
+    position: relative;
+    z-index: 10;
+  }
+
+  #terminal-screen {
+    // these variables are used to keep the same aspect ratio of the screen and computer on resize.
+    $terminal-screen-width: 35vw;
+    $min-terminal-screen-width: 250px;
+    $terminal-original-width: 600;
+    $terminal-original-height: 520;
+
+    $ticker-screen-original-width: 528;
+    $ticker-screen-original-height: 260;
+    $terminal-top-border: 29;
+    $terminal-side-border: 32;
+
+    position: absolute;
+    right: 40px;
+    bottom: 0px;
+    min-width: $min-terminal-screen-width;
+    width: $terminal-screen-width;
+    min-height: ($terminal-original-height / $terminal-original-width) * $terminal-screen-width; // multiplying aspect ratio times the new width to get the proper height.
+    background-image: url("../images/computer.svg");
+    background-size: 100%;
+    z-index: 2;
+
+    #tickers {
+      // multiplying original aspect ratio of screen to computer by the new terminal width
+      width: ($ticker-screen-original-width / $terminal-original-width) * $terminal-screen-width;
+
+      min-width: ($ticker-screen-original-width / $terminal-original-width) * $min-terminal-screen-width;
+      // same with height
+      height: ($ticker-screen-original-height / $terminal-original-height) * $terminal-screen-width;
+      // same with margins
+      margin-top: ($terminal-top-border / $terminal-original-height) * $terminal-screen-width;
+      margin-left: ($terminal-side-border / $terminal-original-width) * $terminal-screen-width;
+
+      background-color: #404040;
+
+      table {
+        height: 100%;
+        font-size: (14 / $terminal-original-height) * $terminal-screen-width;
+        tr {
+          // 6 equal spaces
+          height: 16.66%;
+          td, th {
+            padding: 0px 8px;
+            vertical-align: middle;
+            text-align: center;
+            font-weight: bold;
+            color: $white;
+          }
+          th {
+            font-size: 1.1em;
+          }
+          td.ticker {
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+
+  #volume-bars {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    height: 180px;
+    width: auto;
+    z-index: 1;
+  }
+
+  @media (max-width: $tablet-breakpoint) {
+    // decreasing top padding
+    padding: 100px 50px 50px;
+    h1 {
+      // shrinking font size on mobile
+      font-size: 3rem;
+    }
+    #terminal-screen {
+      // hiding terminal screen on mobile
+      display: none;
+    }
+  }
+}

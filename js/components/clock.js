@@ -14,7 +14,7 @@ module.exports = function (controller) {
 
   // scene for clock
   var clockScene = new ScrollMagic.Scene({
-    triggerElement: "#clock-image-container",
+    triggerElement: "#introduction h2",
     reverse: false
   });
 
@@ -31,18 +31,24 @@ module.exports = function (controller) {
   // tween to animate dots.
   var textTween = TweenMax.to($backtestingText.find("span"), 0.5, {"color": "#00e676"}).repeat(clockAnimationDuration / 0.5).yoyo(true);
 
+  // getting the display status of the container. If it's on mobile, it isn't displayed, and so we don't want to waste time animating it.
+  var display = $clockContainer.css("display");
 
-  // tweens to animate clock
-  clockTimeline
-                // rotate minute hand
-                .to($minutehand, clockAnimationDuration,   {rotation: 360 * 12, transformOrigin: "50% 100%", ease: Power3.easeInOut})
-                // rotate hour hand
-                .to($hourhand, clockAnimationDuration, {rotation: 360, transformOrigin: "50% 100%", ease: Power3.easeInOut}, 0)
-                // animate backtest text
-                .add(textTween, 0)
-                // reveal text
-                .to($clockContainer, 1, {width: "50%"})
-                .to($wrapper.find(".separator"), 1, {width: "80%"});
+  if (display != "none") {
+    // tweens to animate clock
+    clockTimeline
+                  // rotate minute hand
+                  .to($minutehand, clockAnimationDuration,   {rotation: 360 * 12, transformOrigin: "50% 100%", ease: Power3.easeInOut})
+                  // rotate hour hand
+                  .to($hourhand, clockAnimationDuration, {rotation: 360, transformOrigin: "50% 100%", ease: Power3.easeInOut}, 0)
+                  // animate backtest text
+                  .add(textTween, 0)
+                  // reveal text
+                  .to($clockContainer, 1, {width: "50%"})
+  }
+
+  // this is always animated
+  clockTimeline.to($wrapper.find(".separator"), 1, {width: "80%"});
 
   clockScene.setTween(clockTimeline).addIndicators({"name" : "clock animation"}).addTo(controller);
 }

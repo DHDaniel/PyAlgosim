@@ -1,0 +1,55 @@
+
+
+// to avoid little blips of white when scrolling to top
+html {
+  background-color: $black;
+}
+
+body {
+  background-color: $white;
+}
+
+// general classes and helpers
+.accent-color {
+  color: $accent-color;
+}
+
+.separator {
+  height: 4px;
+  background-color: $accent-color;
+  border: none;
+  text-align: left;
+  margin-left: 0px;
+}
+
+.hide-on-desktop {
+  @media (min-width: $tablet-breakpoint + 1) {
+    display: none !important;
+  }
+}
+
+.hide-on-mobile {
+  @media (max-width: $very-big-phone-breakpoint) {
+    display: none !important;
+  }
+}
+
+.hide-on-tablet-and-up {
+  @media (min-width: $very-big-phone-breakpoint) {
+    display: none !important;
+  }
+}
+
+// button styling
+.btn, .btn-large {
+  background-color: $accent-color;
+  &:hover {
+    background-color: darken($accent-color, 10%);
+  }
+  &.dark-bg {
+    background-color: #757575;
+    &:hover {
+      background-color: darken(#757575, 10%);
+    }
+  }
+}

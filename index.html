@@ -36,6 +36,7 @@
         <a href="#" class="btn waves-effect waves-light">Download</a>
       </li>
     </ul>
+    <button id="menu-toggle" class="hide-on-desktop"><i class="fa fa-bars" aria-hidden="true"></i></button>
   </nav>
 
   <header>
@@ -175,8 +176,8 @@
   </header>
 
   <div id="first-wrapper">
-    <div id="time">
-      <h3 id="backtesting">Backtesting <span>...</span></h3>
+    <div id="time" class="hide-on-mobile">
+      <h4 id="backtesting">Backtesting <span>...</span></h4>
       <div id="clock-image-container">
         <img src="images/clock/clock.svg" id="clock" alt="Timer clock"/>
         <img src="images/clock/hourhand.svg" id="hourhand" aria-hidden="true"/>
@@ -188,15 +189,24 @@
       <div class="row">
         <div class="col s12 m6 offset-m6">
           <div id="introduction">
-            <h2>Awesome stuff.</h2>
+            <img src="images/clock/clock-full.svg" class="hide-on-tablet-and-up" id="alt-clock" />
+            <h2>Simple, intuitive and fast.</h2>
             <hr class="separator" />
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+              With PyAlgosim, you can easily dip your feet in the world of algorithmic trading. Test a personal trading strategy that you think might work well, or simulate a million dollar quant-fund managing investors' money - all at the tip of your fingertips.
             </p>
+            <p>
+              PyAlgosim makes it simple to get up and running and begin backtesting algorithmic trading strategies, and its intuitive API means that the learning curve is non-existent. A familiarity with Python is all you need.
+            </p>
+            <a class="waves-effect waves-light btn">See the docs</a>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div style="height: 1000px;">
+
   </div>
 
 

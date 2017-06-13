@@ -1,0 +1,107 @@
+
+
+#navbar {
+  position: fixed;
+  z-index: 100;
+  height: $navbar-height;
+  top: 0px;
+  left: 0px;
+  padding: 0px 20px;
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  color: $white;
+  background-color: transparent;
+
+  border: none;
+  box-shadow: none;
+
+  transition: box-shadow 0.2s ease-in-out;
+  transition: background-color 0.2s ease-in-out;
+
+  &.active {
+    background-color: lighten($black, 5%);
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
+  }
+
+  #logo {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0px 10px;
+    // order 1 and margin-right auto aligns item to the left
+    margin-right: auto;
+    order: 1;
+
+    img {
+      height: 60%;
+      width: auto;
+    }
+  }
+
+  ul {
+    display: inline-block;
+    width: auto;
+    list-style: none;
+    margin: 0px;
+    padding: 0px;
+    height: 100%;
+
+    // order 2 to align item to the right
+    order: 2;
+
+    li {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      a {
+        font-size: 1.1rem;
+      }
+    }
+
+  }
+
+  button#menu-toggle {
+    // order 2 to align item to the right
+    order: 2;
+
+    margin: 0px;
+    background-color: transparent;
+    color: white;
+    padding: 0px;
+    height: 100%;
+    border: none;
+
+    // making the hamburger icon slightly bigger and fine-tuning it to be in the center
+    .fa {
+      margin-top: 20px;
+      font-size: 35px;
+    }
+  }
+
+  // mobile navbar styles
+  @media (max-width: $tablet-breakpoint) {
+    ul {
+      height: calc(100vh - $navbar-height);
+      width: 80%;
+      position: fixed;
+      top: $navbar-height;
+      left: -80%;
+      background-color: $black;
+      box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+
+      li {
+        display: block;
+        width: 100%;
+        height: 50px;
+      }
+    }
+  }
+}
