@@ -14,7 +14,7 @@ module.exports = function (controller) {
 
   // scene for clock
   var clockScene = new ScrollMagic.Scene({
-    triggerElement: "#introduction h2",
+    triggerElement: "#first-wrapper .slide-out-text h2",
     reverse: false
   });
 

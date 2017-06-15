@@ -11,4 +11,6 @@ $(window).load(function() {
 
   require("./components/clock.js")(controller);
 
+  require("./components/analytics.js")(controller);
+
 });

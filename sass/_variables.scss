@@ -12,3 +12,8 @@ $very-big-phone-breakpoint: 600px;
 
 // general variables
 $navbar-height : 80px;
+
+// helper functions
+@function multiply-px($val1, $val2) {
+  @return ($val1 * $val2) / 1px; // cancelling out the px^2
+}

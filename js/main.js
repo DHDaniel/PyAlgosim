@@ -1,5 +1,40 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 
+module.exports = function (controller) {
+
+  var $wrapper = $("#second-wrapper");
+  var $bars = $(".bar");
+  var $barContainer = $("#analytics");
+  var barArray = [];
+
+  var analyticsScene = new ScrollMagic.Scene({
+    triggerElement: "#second-wrapper .slide-out-text h2",
+    reverse: false
+  });
+
+  var analyticsTimeline = new TimelineMax();
+
+  // getting the display status of the container. If it's on mobile, it isn't displayed, and so we don't want to waste time animating it.
+  var display = $barContainer.css("display");
+
+  if (display != "none") {
+    for (var i = 0; i < $bars.length; i++) {
+      var $bar = $($bars[i]);
+      var realHeight = $bar.height();
+      $bar.height(0);
+
+      analyticsTimeline.to($bar, 0.5, {height: realHeight, ease: Back.easeOut.config(4)}, "-=0.3");
+    }
+    analyticsTimeline.to($barContainer, 1, {width: "50%"});
+  }
+
+  analyticsTimeline.to($wrapper.find(".separator"), 1, {width: "80%"});
+
+  analyticsScene.setTween(analyticsTimeline).addIndicators({"name": "bar graph animation"}).addTo(controller);
+}
+
+},{}],2:[function(require,module,exports){
+
 // function to animate clock, takes in the global "controller" variable
 
 module.exports = function (controller) {
@@ -15,7 +50,7 @@ module.exports = function (controller) {
 
   // scene for clock
   var clockScene = new ScrollMagic.Scene({
-    triggerElement: "#introduction h2",
+    triggerElement: "#first-wrapper .slide-out-text h2",
     reverse: false
   });
 
@@ -54,7 +89,7 @@ module.exports = function (controller) {
   clockScene.setTween(clockTimeline).addIndicators({"name" : "clock animation"}).addTo(controller);
 }
 
-},{}],2:[function(require,module,exports){
+},{}],3:[function(require,module,exports){
 
 var $nav = $("#navbar");
 $(window).scroll(function() {
@@ -78,7 +113,7 @@ $("#menu-toggle").click(function () {
   isNavOpen = !isNavOpen;
 });
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 /*======================
 HELPER FUNCTIONS
 =======================*/
@@ -133,7 +168,7 @@ var tl = new TimelineLite();
   }, rand);
 }());
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 
 
 $(window).load(function() {
@@ -147,6 +182,8 @@ $(window).load(function() {
 
   require("./components/clock.js")(controller);
 
+  require("./components/analytics.js")(controller);
+
 });
 
-},{"./components/clock.js":1,"./components/navbar.js":2,"./components/terminal.js":3}]},{},[4]);
+},{"./components/analytics.js":1,"./components/clock.js":2,"./components/navbar.js":3,"./components/terminal.js":4}]},{},[5]);

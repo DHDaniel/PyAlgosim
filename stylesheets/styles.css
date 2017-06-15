@@ -242,14 +242,8 @@ body {
   }
 }
 
-/* line 2, ../sass/_info-sections.scss */
-#first-wrapper {
-  background-color: #f5f5f5;
-  position: relative;
-  min-height: 600px;
-}
-/* line 7, ../sass/_info-sections.scss */
-#first-wrapper #time {
+/* line 3, ../sass/_info-sections.scss */
+.slide-out-container {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -261,28 +255,57 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
+}
+
+/* line 19, ../sass/_info-sections.scss */
+.slide-out-text {
+  width: 100%;
+  padding: 60px 35px 60px 35px;
+}
+/* line 22, ../sass/_info-sections.scss */
+.slide-out-text .separator {
+  width: 0px;
+}
+/* line 26, ../sass/_info-sections.scss */
+.slide-out-text #alt-clock {
+  width: 180px;
+  height: auto;
+}
+
+/* line 33, ../sass/_info-sections.scss */
+#first-wrapper {
+  background-color: #f5f5f5;
+  position: relative;
+  min-height: 600px;
+}
+/* line 37, ../sass/_info-sections.scss */
+#first-wrapper .row {
+  margin-bottom: 0px;
+}
+/* line 41, ../sass/_info-sections.scss */
+#first-wrapper #time {
   background-color: #00e676;
 }
-/* line 23, ../sass/_info-sections.scss */
+/* line 44, ../sass/_info-sections.scss */
 #first-wrapper #time #backtesting {
   color: #009a4f;
   margin-bottom: 30px;
 }
-/* line 28, ../sass/_info-sections.scss */
+/* line 49, ../sass/_info-sections.scss */
 #first-wrapper #time #clock-image-container {
   position: relative;
   width: 200px;
 }
-/* line 31, ../sass/_info-sections.scss */
+/* line 52, ../sass/_info-sections.scss */
 #first-wrapper #time #clock-image-container #clock {
   width: 100%;
   height: auto;
 }
-/* line 35, ../sass/_info-sections.scss */
+/* line 56, ../sass/_info-sections.scss */
 #first-wrapper #time #clock-image-container #minutehand, #first-wrapper #time #clock-image-container #hourhand, #first-wrapper #time #clock-image-container #center {
   position: absolute;
 }
-/* line 38, ../sass/_info-sections.scss */
+/* line 59, ../sass/_info-sections.scss */
 #first-wrapper #time #clock-image-container #center {
   top: 8px;
   left: 0px;
@@ -292,7 +315,7 @@ body {
   height: 32px;
   width: auto;
 }
-/* line 48, ../sass/_info-sections.scss */
+/* line 69, ../sass/_info-sections.scss */
 #first-wrapper #time #clock-image-container #minutehand {
   width: 5px;
   height: auto;
@@ -301,7 +324,7 @@ body {
   right: 0px;
   margin: auto;
 }
-/* line 56, ../sass/_info-sections.scss */
+/* line 77, ../sass/_info-sections.scss */
 #first-wrapper #time #clock-image-container #hourhand {
   width: 8px;
   height: auto;
@@ -310,17 +333,55 @@ body {
   right: 0px;
   margin: auto;
 }
-/* line 67, ../sass/_info-sections.scss */
-#first-wrapper #introduction {
-  width: 100%;
-  padding: 60px 35px 60px 35px;
+
+/* line 91, ../sass/_info-sections.scss */
+#second-wrapper {
+  background-color: #f5f5f5;
+  position: relative;
+  min-height: 600px;
 }
-/* line 70, ../sass/_info-sections.scss */
-#first-wrapper #introduction .separator {
-  width: 0px;
+/* line 95, ../sass/_info-sections.scss */
+#second-wrapper .row {
+  margin-bottom: 0px;
 }
-/* line 74, ../sass/_info-sections.scss */
-#first-wrapper #introduction #alt-clock {
-  width: 180px;
+/* line 99, ../sass/_info-sections.scss */
+#second-wrapper #analytics {
+  background-color: #212121;
+  right: 0px;
+  left: auto;
+}
+/* line 104, ../sass/_info-sections.scss */
+#second-wrapper #analytics #analytics-container {
+  position: relative;
+  width: 230px;
   height: auto;
+}
+/* line 120, ../sass/_info-sections.scss */
+#second-wrapper #analytics #analytics-container #graph-background {
+  width: 100%;
+  height: auto;
+}
+/* line 124, ../sass/_info-sections.scss */
+#second-wrapper #analytics #analytics-container .bar {
+  position: absolute;
+  height: auto;
+  width: 48.51563px;
+  bottom: 17.67969px;
+}
+/* line 130, ../sass/_info-sections.scss */
+#second-wrapper #analytics #analytics-container #bluebar {
+  margin-left: 21.11328px;
+}
+/* line 133, ../sass/_info-sections.scss */
+#second-wrapper #analytics #analytics-container #greenbar {
+  margin-left: 90.74219px;
+}
+/* line 136, ../sass/_info-sections.scss */
+#second-wrapper #analytics #analytics-container #redbar {
+  margin-left: 160.37109px;
+}
+
+/* line 2, ../sass/_footer.scss */
+#footer {
+  background-color: #212121;
 }

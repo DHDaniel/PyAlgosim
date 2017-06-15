@@ -1,23 +1,44 @@
 
+// bold-coloured containers that are animated on desktop
+.slide-out-container {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100%;
+  padding: 0px 20px;
+  z-index: 10;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+// text behind containers
+.slide-out-text {
+  width: 100%;
+  padding: 60px 35px 60px 35px;
+  .separator {
+    width: 0px;
+  }
+  // image of clock without animations
+  #alt-clock {
+    width: 180px;
+    height: auto;
+  }
+}
+
+// wrapper for the "simple, intuitive and fast" part
 #first-wrapper {
   background-color: $white;
   position: relative;
   min-height: 600px;
+  .row {
+    margin-bottom: 0px;
+  }
 
   #time {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    width: 100%;
-    height: 100%;
-    padding: 0px 20px;
-    z-index: 10;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
     background-color: $accent-color;
 
     #backtesting {
@@ -63,17 +84,58 @@
       }
     }
   }
+}
 
-  #introduction {
-    width: 100%;
-    padding: 60px 35px 60px 35px;
-    .separator {
-      width: 0px;
-    }
-    // image of clock without animations
-    #alt-clock {
-      width: 180px;
+
+// wrapper for the "analytics" part
+#second-wrapper {
+  background-color: $white;
+  position: relative;
+  min-height: 600px;
+  .row {
+    margin-bottom: 0px;
+  }
+
+  #analytics {
+    background-color: $black;
+    right: 0px;
+    left: auto;
+
+    #analytics-container {
+      $width: 230px;
+      $original-width: 256;
+      $original-height: 219;
+      $multiplier: $width / $original-width;
+
+      $base-height: multiply-px(13px, $multiplier);
+      $blue-bar-height: multiply-px(137px, $multiplier);
+      $green-bar-height: multiply-px(206px, $multiplier);
+      $red-bar-height: multiply-px(81px, $multiplier);
+      $bar-width: multiply-px(54px, $multiplier);
+      $bar-separation: multiply-px(23.5px, $multiplier);
+
+      position: relative;
+      width: $width;
       height: auto;
+      #graph-background {
+        width: 100%;
+        height: auto;
+      }
+      .bar {
+        position: absolute;
+        height: auto;
+        width: $bar-width;
+        bottom: $base-height + 6px; // finetuning because CSS and HTML is stupid and container doesn't fit smugly around image.
+      }
+      #bluebar {
+        margin-left: $bar-separation;
+      }
+      #greenbar {
+        margin-left: ($bar-separation * 2) + $bar-width;
+      }
+      #redbar {
+        margin-left: ($bar-separation * 3) + (2 * $bar-width);
+      }
     }
   }
 }
