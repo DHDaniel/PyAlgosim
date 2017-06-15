@@ -383,5 +383,31 @@ body {
 
 /* line 2, ../sass/_footer.scss */
 #footer {
-  background-color: #212121;
+  background-color: #2e2e2e;
+  padding: 40px 0px;
+}
+/* line 5, ../sass/_footer.scss */
+#footer ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+/* line 9, ../sass/_footer.scss */
+#footer ul li {
+  display: inline-block;
+  margin: 0px 10px;
+}
+/* line 12, ../sass/_footer.scss */
+#footer ul li a {
+  color: #00e676;
+}
+/* line 17, ../sass/_footer.scss */
+#footer #copyright {
+  padding: 30px 0px 0px;
+  color: gainsboro;
+}
+/* line 20, ../sass/_footer.scss */
+#footer #copyright a {
+  text-decoration: underline;
+  color: gainsboro;
 }
