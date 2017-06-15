@@ -30,7 +30,7 @@ module.exports = function (controller) {
 
   analyticsTimeline.to($wrapper.find(".separator"), 1, {width: "80%"});
 
-  analyticsScene.setTween(analyticsTimeline).addIndicators({"name": "bar graph animation"}).addTo(controller);
+  analyticsScene.setTween(analyticsTimeline).addTo(controller);
 }
 
 },{}],2:[function(require,module,exports){
@@ -86,7 +86,7 @@ module.exports = function (controller) {
   // this is always animated
   clockTimeline.to($wrapper.find(".separator"), 1, {width: "80%"});
 
-  clockScene.setTween(clockTimeline).addIndicators({"name" : "clock animation"}).addTo(controller);
+  clockScene.setTween(clockTimeline).addTo(controller);
 }
 
 },{}],3:[function(require,module,exports){

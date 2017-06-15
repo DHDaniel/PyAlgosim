@@ -29,5 +29,5 @@ module.exports = function (controller) {
 
   analyticsTimeline.to($wrapper.find(".separator"), 1, {width: "80%"});
 
-  analyticsScene.setTween(analyticsTimeline).addIndicators({"name": "bar graph animation"}).addTo(controller);
+  analyticsScene.setTween(analyticsTimeline).addTo(controller);
 }
