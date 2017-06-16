@@ -2,10 +2,11 @@
 
 $(window).load(function() {
 
+
   // initializing scroll controller to add effects to.
   var controller = new ScrollMagic.Controller();
 
-  require("./components/terminal.js");
+  require("./components/terminal.js")();
 
   require("./components/navbar.js");
 
@@ -13,4 +14,5 @@ $(window).load(function() {
 
   require("./components/analytics.js")(controller);
 
+  console.log("Should always log.");
 });

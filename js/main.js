@@ -2,35 +2,39 @@
 
 module.exports = function (controller) {
 
-  var $wrapper = $("#second-wrapper");
-  var $bars = $(".bar");
-  var $barContainer = $("#analytics");
-  var barArray = [];
+  try {
+    var $wrapper = $("#second-wrapper");
+    var $bars = $(".bar");
+    var $barContainer = $("#analytics");
+    var barArray = [];
 
-  var analyticsScene = new ScrollMagic.Scene({
-    triggerElement: "#second-wrapper .slide-out-text h2",
-    reverse: false
-  });
+    var analyticsScene = new ScrollMagic.Scene({
+      triggerElement: "#second-wrapper .slide-out-text h2",
+      reverse: false
+    });
 
-  var analyticsTimeline = new TimelineMax();
+    var analyticsTimeline = new TimelineMax();
 
-  // getting the display status of the container. If it's on mobile, it isn't displayed, and so we don't want to waste time animating it.
-  var display = $barContainer.css("display");
+    // getting the display status of the container. If it's on mobile, it isn't displayed, and so we don't want to waste time animating it.
+    var display = $barContainer.css("display");
 
-  if (display != "none") {
-    for (var i = 0; i < $bars.length; i++) {
-      var $bar = $($bars[i]);
-      var realHeight = $bar.height();
-      $bar.height(0);
+    if (display != "none") {
+      for (var i = 0; i < $bars.length; i++) {
+        var $bar = $($bars[i]);
+        var realHeight = $bar.height();
+        $bar.height(0);
 
-      analyticsTimeline.to($bar, 0.5, {height: realHeight, ease: Back.easeOut.config(4)}, "-=0.3");
+        analyticsTimeline.to($bar, 0.5, {height: realHeight, ease: Back.easeOut.config(4)}, "-=0.3");
+      }
+      analyticsTimeline.to($barContainer, 1, {width: "50%"});
     }
-    analyticsTimeline.to($barContainer, 1, {width: "50%"});
+
+    analyticsTimeline.to($wrapper.find(".separator"), 1, {width: "80%"});
+
+    analyticsScene.setTween(analyticsTimeline).addTo(controller);
+  } catch (e) {
+    console.error(e);  
   }
-
-  analyticsTimeline.to($wrapper.find(".separator"), 1, {width: "80%"});
-
-  analyticsScene.setTween(analyticsTimeline).addTo(controller);
 }
 
 },{}],2:[function(require,module,exports){
@@ -39,54 +43,57 @@ module.exports = function (controller) {
 
 module.exports = function (controller) {
 
-  // Clock animation for page
+  try {
+    // Clock animation for page
+    var $wrapper = $("#first-wrapper");
+    var $clockContainer = $("#time");
+    var $clock = $("#clock");
+    var $minutehand = $("#minutehand");
+    var $hourhand = $("#hourhand");
+    var $backtestingText = $("#backtesting");
 
-  var $wrapper = $("#first-wrapper");
-  var $clockContainer = $("#time");
-  var $clock = $("#clock");
-  var $minutehand = $("#minutehand");
-  var $hourhand = $("#hourhand");
-  var $backtestingText = $("#backtesting");
+    // scene for clock
+    var clockScene = new ScrollMagic.Scene({
+      triggerElement: "#first-wrapper .slide-out-text h2",
+      reverse: false
+    });
 
-  // scene for clock
-  var clockScene = new ScrollMagic.Scene({
-    triggerElement: "#first-wrapper .slide-out-text h2",
-    reverse: false
-  });
+    // timeline
+    var clockTimeline = new TimelineMax({
+      // uses jQuery to add word "done" at the end
+      onComplete: function () {
+      $backtestingText.html("Backtesting done.");
+      }
+    });
 
-  // timeline
-  var clockTimeline = new TimelineMax({
-    // uses jQuery to add word "done" at the end
-    onComplete: function () {
-    $backtestingText.html("Backtesting done.");
+    var clockAnimationDuration = 3.5;
+
+    // tween to animate dots.
+    var textTween = TweenMax.to($backtestingText.find("span"), 0.5, {"color": "#00e676"}).repeat(clockAnimationDuration / 0.5).yoyo(true);
+
+    // getting the display status of the container. If it's on mobile, it isn't displayed, and so we don't want to waste time animating it.
+    var display = $clockContainer.css("display");
+
+    if (display != "none") {
+      // tweens to animate clock
+      clockTimeline
+                    // rotate minute hand
+                    .to($minutehand, clockAnimationDuration,   {rotation: 360 * 12, transformOrigin: "50% 100%", ease: Power3.easeInOut})
+                    // rotate hour hand
+                    .to($hourhand, clockAnimationDuration, {rotation: 360, transformOrigin: "50% 100%", ease: Power3.easeInOut}, 0)
+                    // animate backtest text
+                    .add(textTween, 0)
+                    // reveal text
+                    .to($clockContainer, 1, {width: "50%"})
     }
-  });
 
-  var clockAnimationDuration = 3.5;
+    // this is always animated
+    clockTimeline.to($wrapper.find(".separator"), 1, {width: "80%"});
 
-  // tween to animate dots.
-  var textTween = TweenMax.to($backtestingText.find("span"), 0.5, {"color": "#00e676"}).repeat(clockAnimationDuration / 0.5).yoyo(true);
-
-  // getting the display status of the container. If it's on mobile, it isn't displayed, and so we don't want to waste time animating it.
-  var display = $clockContainer.css("display");
-
-  if (display != "none") {
-    // tweens to animate clock
-    clockTimeline
-                  // rotate minute hand
-                  .to($minutehand, clockAnimationDuration,   {rotation: 360 * 12, transformOrigin: "50% 100%", ease: Power3.easeInOut})
-                  // rotate hour hand
-                  .to($hourhand, clockAnimationDuration, {rotation: 360, transformOrigin: "50% 100%", ease: Power3.easeInOut}, 0)
-                  // animate backtest text
-                  .add(textTween, 0)
-                  // reveal text
-                  .to($clockContainer, 1, {width: "50%"})
+    clockScene.setTween(clockTimeline).addTo(controller);
+  } catch (e) {
+      console.error(e);
   }
-
-  // this is always animated
-  clockTimeline.to($wrapper.find(".separator"), 1, {width: "80%"});
-
-  clockScene.setTween(clockTimeline).addTo(controller);
 }
 
 },{}],3:[function(require,module,exports){
@@ -135,48 +142,56 @@ function getDirectionColour(oldPrice, newPrice) {
   }
 }
 
-/*========================
-Ticker screen animation
-=======================*/
-var $tickerTable = $("#tickers table");
-var $prices = $tickerTable.find(".price");
-var $bids = $tickerTable.find(".bid");
-var $asks = $tickerTable.find(".ask");
-var $volumes = $tickerTable.find(".vol");
-var itemsToChange = [$prices, $bids, $asks];
-var tl = new TimelineLite();
+module.exports = function () {
 
-// self-executing function taking care of changing ticker quotes.
-// for some reason, it speeds up and out of control with time.
-(function loop() {
-  var rand = Math.round(Math.random() * (2000 - 700)) + 700;
-  setTimeout(function() {
-    // randomly select category
-    var $category = itemsToChange[Math.floor(Math.random() * itemsToChange.length)];
-    // randomly select cell
-    var $cell = $( $category[Math.floor(Math.random() * $category.length)] );
+  try {
+    /*========================
+    Ticker screen animation
+    =======================*/
+    var $tickerTable = $("#tickers table");
+    var $prices = $tickerTable.find(".price");
+    var $bids = $tickerTable.find(".bid");
+    var $asks = $tickerTable.find(".ask");
+    var $volumes = $tickerTable.find(".vol");
+    var itemsToChange = [$prices, $bids, $asks];
+    var tl = new TimelineLite();
 
-    var number = parseFloat($cell.html());
-    var newValue = genRandomRange(number, number * 0.01 );
-    var colour = getDirectionColour(number, newValue);
+    // self-executing function taking care of changing ticker quotes.
+    // for some reason, it speeds up and out of control with time.
+    (function loop() {
+      var rand = Math.round(Math.random() * (2000 - 700)) + 700;
+      setTimeout(function() {
+        // randomly select category
+        var $category = itemsToChange[Math.floor(Math.random() * itemsToChange.length)];
+        // randomly select cell
+        var $cell = $( $category[Math.floor(Math.random() * $category.length)] );
+
+        var number = parseFloat($cell.html());
+        var newValue = genRandomRange(number, number * 0.01 );
+        var colour = getDirectionColour(number, newValue);
 
 
-    $cell.html(newValue);
-    tl.to($cell, 0.2, {color: "#000000", "background-color": "#f2f2f2"})
-      .to($cell, 0.3, {color: colour, "background-color": "transparent"});
-    loop();
-  }, rand);
-}());
+        $cell.html(newValue);
+        tl.to($cell, 0.2, {color: "#000000", "background-color": "#f2f2f2"})
+          .to($cell, 0.3, {color: colour, "background-color": "transparent"});
+        loop();
+      }, rand);
+    }());
+  } catch (e) {
+    console.log(e);
+  }
+}
 
 },{}],5:[function(require,module,exports){
 
 
 $(window).load(function() {
 
+
   // initializing scroll controller to add effects to.
   var controller = new ScrollMagic.Controller();
 
-  require("./components/terminal.js");
+  require("./components/terminal.js")();
 
   require("./components/navbar.js");
 
@@ -184,6 +199,7 @@ $(window).load(function() {
 
   require("./components/analytics.js")(controller);
 
+  console.log("Should always log.");
 });
 
 },{"./components/analytics.js":1,"./components/clock.js":2,"./components/navbar.js":3,"./components/terminal.js":4}]},{},[5]);
