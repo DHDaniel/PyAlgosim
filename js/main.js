@@ -121,6 +121,32 @@ $("#menu-toggle").click(function () {
 });
 
 },{}],4:[function(require,module,exports){
+
+module.exports = function (controller) {
+
+  try {
+
+    var $title = $("#top-banner h1");
+    var height = $title.height();
+
+    var titleScene = new ScrollMagic.Scene({
+      triggerElement: "#top-banner",
+      duration: 300,
+      triggerHook: "onLeave"
+    });
+
+    var timeline = new TimelineMax();
+
+    timeline.to($title, 1, {"font-size": "0"});
+
+    titleScene.setTween(timeline).addTo(controller);
+
+  } catch (e) {
+    console.error(e);
+  }
+}
+
+},{}],5:[function(require,module,exports){
 /*======================
 HELPER FUNCTIONS
 =======================*/
@@ -182,11 +208,9 @@ module.exports = function () {
   }
 }
 
-},{}],5:[function(require,module,exports){
-
+},{}],6:[function(require,module,exports){
 
 $(window).load(function() {
-
 
   // initializing scroll controller to add effects to.
   var controller = new ScrollMagic.Controller();
@@ -195,11 +219,14 @@ $(window).load(function() {
 
   require("./components/navbar.js");
 
+  require("./components/pages.js")(controller);
+
   require("./components/clock.js")(controller);
 
   require("./components/analytics.js")(controller);
 
+
   console.log("Should always log.");
 });
 
-},{"./components/analytics.js":1,"./components/clock.js":2,"./components/navbar.js":3,"./components/terminal.js":4}]},{},[5]);
+},{"./components/analytics.js":1,"./components/clock.js":2,"./components/navbar.js":3,"./components/pages.js":4,"./components/terminal.js":5}]},{},[6]);

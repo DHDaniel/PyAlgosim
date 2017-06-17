@@ -3,157 +3,315 @@
 
 <head>
 
-  <title>PyAlgosim - Documentation</title>
+  <title>PyAlgosim - python-built algorithmic trading backtester.</title>
 
   <!-- Tag for better mobile display -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <meta name="description" content="PyAlgosim - A simple Python-built backtester for algorithmic stock trading.">
 
-  <link href="css/materialize.min.css" type="text/css" rel="stylesheet"/>
-  <!-- For code markup -->
-  <link href="css/prism.css" type="text/css" rel="stylesheet"/>
-  <link href="css/styles.css" type="text/css" rel="stylesheet"/>
+  <link href="stylesheets/materialize.min.css" type="text/css" rel="stylesheet"/>
 
-  <!-- Google Material Design icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="stylesheets/highlight/dracula.css">
 
-  <script src="js/jquery-2.2.0.js" type="text/javascript"></script>
-  <script src="js/materialize.min.js" type="text/javascript"></script>
-  <script src="js/prism.js" type="text/javascript"></script>
-  <script src="js/script.js" type="text/javascript"></script>
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+
+  <link href="stylesheets/styles.css" type="text/css" rel="stylesheet"/>
 
 </head>
 
 <body>
 
-  <header>
-    <div class="navbar-fixed">
-      <nav class="orange">
-        <div class="container">
-          <div class="nav-wrapper">
-            <a href="index.html" class="brand-logo"><span class="light-blue-text">Py</span>Algosim</a>
-            <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-              <li><a href="getting-started.html">Getting started</a></li>
-              <li class="active"><a href="docs.html">Docs</a></li>
-              <li><a href="examples.html">Examples</a></li>
-              <li><a href="https://github.com/DHDaniel/PyAlgosim/releases" class="btn light-blue">Download</a></li>
-            </ul>
-            <ul class="side-nav light-blue" id="mobile-nav">
-              <li><a href="getting-started.html">Getting started</a></li>
-              <li class="active"><a href="docs.html">Docs</a></li>
-              <li><a href="examples.html">Examples</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
+  <nav id="navbar">
+    <a href="/" id="logo"><img src="images/paslogo.svg" /></a>
+    <ul>
+      <li>
+        <a href="getting-started.html">Getting started</a>
+      </li>
+      <li>
+        <a href="docs.html">Documentation</a>
+      </li>
+      <li>
+        <a href="contact.html">Contact</a>
+      </li>
+      <li>
+        <a href="https://github.com/DHDaniel/PyAlgosim/releases/latest" class="btn waves-effect waves-light">Download</a>
+      </li>
+    </ul>
+    <button id="menu-toggle" class="hide-on-desktop"><i class="fa fa-bars" aria-hidden="true"></i></button>
+  </nav>
+
+  <header id="top-banner">
+    <h1>Documentation</h1>
   </header>
 
-  <main>
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="light-blue-text long-word">Documentation</h1>
-      </div>
-
-      <nav class="light-blue">
-        <div class="nav-wrapper breadcrumb-wrapper">
-          <div class="col s12">
-            <a class="breadcrumb" href="index.html">Home</a>
-            <a class="breadcrumb" href="docs.html">Documentation</a>
-          </div>
-        </div>
-      </nav>
-
-      <div class="page-content">
-
-        <h5 class="light-blue-text">PyBank.Account()</h5>
-        <p>One of the most important features of trading is actually having a trading/bank account. In PyAlgosim, this functionality is provided by the <code class="language-python">PyBank.Account()</code> class. It has numerous functions that you can use to buy and sell stock, and it also takes into account transaction fees for you, so you don't have to worry about it. Also, it is completely customizable - you can choose how many funds to start with, the cost of transactions, etc.</p>
-
-        <p>Where you will write your code, <code class="language-bash">pysimcode.py</code>, the <code class="language-python">Account</code> class is already imported, and is accessed in the <code class="language-bash">main()</code> method as <code class="language-python">account</code>. If you wish to change the starting funds of the account ($100,000 by default) you must open the <code class="language-bash">pysim.py</code> program, and look for the <code class="language-python">PyBank.Account()</code> declaration. Change the number to whatever number you wish to use.</p>
-
-        <p>To alter the transaction fee value, you must go into the <code class="language-bash">PyBank.py</code> program, and alter the <code class="language-python">self.TRANSACTION_FEE</code> value.</p>
-
-        <p><strong>Warning:</strong> do not change anything else, or move these files out of place, as it may affect the program and produce errors at runtime.</p>
-
-        <h5 class="light-blue-text">Accessing properties</h5>
-
-        <p><code class="language-python">account.funds</code></p>
-
-        <p>The value of the account, excluding the value of the stocks - the amount of cash in your account.</p>
-
-        <p><code class="language-python">account.transactions</code></p>
-
-        <p>The number of transactions made by the account.</p>
-
-        <p><code class="language-python">account.stocks_owned</code></p>
-
-        <p>A dictionary with all the stocks owned at the time, with each key being the stock ticker, and the values being another dictionary with four keys - the <strong>quantity</strong>, <strong>bought_p (price at which it was bought)</strong>, <strong>current_p (the current price)</strong>, and <strong>options</strong>. The "options" key will mainly be used by the program itself, since it contains information about pending orders (e.g a trailing stop).</p>
-
-        <p>
-          <pre>
-            <code class="language-python">
-# stocks_owned is in the form
-{ "AAPL" : {"quantity" : 100, "bought_p" : 110.56, "current_p" : 132.00, "options" : {} }}}
-            </code>
-          </pre>
-        </p>
-
-        <p><code class="language-python">account.TRANSACTION_FEE</code></p>
-
-        <p>The current cost of transactions.</p>
-
-        <h5 class="light-blue-text">Methods</h5>
-
-        <p><code class="language-python">account.buy_stock(ticker, quantity)</code></p>
-
-        <p>Buys the specified stock, using the ticker and quantity, and stores it in the account. If the stock does not exist, or the account does not have enough funds to purchase it, it will raise an error and quit.</p>
-
-        <p><code class="language-python">account.sell_stock(ticker, quantity)</code></p>
-
-        <p>Sells the specified stock, and, if all the stock owned is sold, it removes the stock from the account. The function will raise an error if the stock is not owned by the account, or if you are trying to sell more than what you own, and quit. The parameter <code class="language-python">quantity</code> can be either a numeric value, like <code class="language-python">100</code>, or the string <code class="language-python">"all"</code>, indicating the program to sell all of the stock owned.</p>
-
-        <p><code class="language-python">account.trailing_stop(ticker, quantity, points, percentage=False)</code></p>
-
-        <p>
-          Begins a sell trailing stop order for the ticker provided and the quantity stated. The variable <code class="language-python">points</code> indicates the tolerance of the order (how much you want to allow it to go down before selling), and <code class="language-python">percentage</code> indicated whether <code class="language-python">points</code> should be read as a percentage or as points. By default, it is set to False. If you attempt to sell more stock than what you own, an error will be raised and the program will quit.
-        </p>
-
-        <p>
-          <strong>Note:</strong> if you place two trailing stop orders for the <em>same</em> stock (e.g placing a trailing stop for 100 shares of AAPL and then placing the same order again), the quantity will be accumulated (e.g now the order will be for 200 shares of AAPL) and the <code class="language-python">points</code> variable will be <strong>replaced by the last value provided.</strong>
-        </p>
-
-        <p><code class="language-python">account.sell_all()</code></p>
-
-        <p>Sells all the stocks in the account. This function is always called at the end of the backtesting program in order to return the profit/loss made at the end of backtesting.</p>
-
-      </div>
-
-    </div>
-  </main>
-
-  <footer class="page-footer orange">
+  <div id="content">
     <div class="container">
       <div class="row">
-        <div class="col s12 m6">
-          <ul>
-            <li><a href="docs.html" class="white-text">Documentation</a></li>
-            <li><a href="getting-started.html" class="white-text">Getting started</a></li>
-            <li><a href="examples.html" class="white-text">Examples</a></li>
-            <li><a href="https://github.com/DHDaniel/PyAlgosim" class="white-text">GitHub</a></li>
-            <li><a href="https://github.com/DHDaniel/PyAlgosim/releases" class="white-text">Download</a></li>
-          </ul>
+
+        <div class="col s12 m8">
+          <h1 id="pyalgosimthesimulator">PyAlgosim, the simulator</h1>
+
+<p>PyAlgosim is the module that takes care of running the algorithm that you wish to backtest. Using it is very simple and intuitive. First, you must import the module into your program - <strong>note that your program should be created in the same directory as the PyAlgosim.py file for the program to properly communicate with the generated database and ticker file</strong>.</p>
+
+<pre><code class="python language-python">import PyAlgosim
+</code></pre>
+
+<h2 id="thepyalgosimapi">The PyAlgosim API</h2>
+
+<h4 id="_class_pyalgosimpyalgosim_account__db_path__ticker_list_path__variables_"><em>class</em> PyAlgosim.PyAlgosim(<em>account</em>, [<em>db_path<em>, </em>ticker_list_path</em>, <em>variables</em>])</h4>
+
+<p>This method initializes the PyAlgosim simulator. It returns an object that will function as the backtester for your algorithm.</p>
+
+<p><strong>account</strong> - a PyBank object. The trading account that you wish to use during the simulator.
+<strong>db<em>path</strong> (optional) - the path to the database file you are using. Should be a <code>string</code>. If you used the initialize.py script and are running the program from PyAlgosim.py 's directory, then you shouldn't have to set this explicitly. Defaults to <code>./utils/stocks.db</code>.
+<strong>ticker</em>list_path</strong> (optional) - the path to the ticker list file that should have been generated during the initialize.py script. Should be a <code>string</code>. Again, if you followed the initial setup instructions, you shouldn't have to explicitly set this. Defaults to <code>./utils/tickers.json</code>.
+<strong>variables</strong> (optional) - an dictionary "template" (dictionary with empty fields) with any optional variables that you want your algorithm to have access to during the simulation. For example, the dictionary could store recurring averages, statistics, record highs and lows, etc. Defaults to <code>None</code>.</p>
+
+<p>For example:</p>
+
+<pre><code class="python language-python">import PyAlgosim
+import PyBank
+
+trade_account = PyBank.Account()
+
+# this will use all of the default configuration, assuming all files have been kept in their original place
+backtester = PyAlgosim.PyAlgosim(trade_account)
+
+# this uses custom configuration for the stock database and the ticker list json file
+backtester = PyAlgosim.PyAlgosim(trade_account, db_path="/some/other/path/mydata.db", ticker_list_path="/some/other/path/mytickers.json")
+
+# this uses a variables dictionary, for potentially calculating a simple moving average for 50 days and the highest and lowest prices of the stock. Note that it is a "template" in the sense that it is empty - it will be provided exactly like that at the start of backtesting each stock.
+my_variables = {
+    highest_price = 0
+    lowest_price = 0
+    past_50_prices = []
+}
+backtester = PyAlgosim.PyAlgosim(trade_account, variables=my_variables)
+</code></pre>
+
+<h4 id="_classmethod_pyalgosimsimulate_algorithm__time_start__time_end_"><em>classmethod</em> PyAlgosim.simulate(<em>algorithm</em>[, <em>time_start</em>, <em>time_end</em>])</h4>
+
+<p>This method performs the backtesting on the algorithm provided, using the data specified in <code>time_start</code> and <code>time_end</code>.</p>
+
+<p><strong>algorithm</strong> - the name of the algorithm (function) that you wish to backtest. The function provided as an algorithm must take in the following variables in the order specified:</p>
+
+<ul>
+<li><p>A <strong>stock data</strong> dictionary that contains information about the stock being processed. The object will contain the following properties:</p>
+
+<ul>
+<li><strong>date</strong> - an integer of the form YYYYMMDD. The historical date of the data.</li>
+
+<li><strong>price</strong> - a float. The current price of the stock.</li>
+
+<li><strong>ticker</strong> - a string containing the ticker of the stock.</li></ul></li>
+
+<li><p>A <strong>PyBank.Account()</strong> object, which will be the account you pass as an argument to PyAlgosim. The algorithm can access the account using this parameter.</p></li>
+
+<li><p>A <strong>variables dictionary</strong>, which will be the variables template dictionary that you provide PyAlgosim. The template will be used at the start of backtesting for each ticker (it will not remain the same across <em>all</em> tickers, just the ticker that is being simulated at the time. Keep this in mind).</p></li>
+</ul>
+
+<p><strong>time<em>start, time</em>end</strong> - optional parameters to specify the time to start and end the backtesting. They should be <strong>datetime</strong> objects within the range of the data being used. If they exceed the ranges, or the date doesn't exist (e.g the market was closed on the date), then PyAlgosim will just use the closest date to the one specified. The range of data in the database is from <strong>January 2nd, 1998 to August 9th, 2013</strong>.</p>
+
+<p>Example uses:</p>
+
+<pre><code class="python language-python">import PyAlgosim
+import PyBank
+import datetime
+
+trade_acc = PyBank.Account()
+backtester = PyAlgosim.PyAlgosim(trade_acc)
+
+# this algorithm checks to see if you currently own the stock, and if you have enough money to buy one share of the stock. It then buys one share if the conditions are met.
+def algorithm(stock, account, variables):
+    if stock["ticker"] not in account.stocks_owned and account.funds - (stock["price"] + account.TRANSACTION_FEE) &gt; 0:
+        account.buy_stock(stock["ticker"], 1)
+
+# Here, the algorithm is passed to the simulate() method. Only a start date is provided.
+backtester.simulate(algorithm, datetime.date(2008, 1, 1) )
+</code></pre>
+
+<hr />
+
+<h1 id="pybankthetradingaccount">PyBank, the trading account</h1>
+
+<p>The PyBank module allows you to simulate a trading account, working together with the PyAlgosim module. It is what you will use to buy stock, sell stock, and other things you might to in a real-life trading account. The API is simple and intuitive to use.</p>
+
+<p>It should be noted that the PyBank module cannot be used on its own. It should be used in conjunction with the PyAlgosim module for the backtesting to work properly.</p>
+
+<h2 id="thepybankapi">The PyBank API</h2>
+
+<h4 id="_class_pybankaccount_funds100000__transaction_fee699_"><em>class</em> PyBank.Account([<em>funds=100000</em>, <em>transaction_fee=6.99</em>])</h4>
+
+<p>Returns an Account object, which you can perform various actions on, like in a trading account. Takes in two optional arguments:</p>
+
+<p><strong>funds</strong> - float that defaults to 100,000. This is the initial funds that you wish the account to start out with.
+<strong>transaction_fee</strong> - float that defaults to 6.99. This is the value of the transaction fees charged by the trading account (charged on every trade you perform).</p>
+
+<pre><code class="python language-python">import PyBank
+
+# creating an account with different initial funds and transaction fee
+account = PyBank.Account(funds=10000, transaction_fee=9.99)
+</code></pre>
+
+<h4 id="_classmethod_accountbuy_stock_ticker__quantity_"><em>classmethod</em> Account.buy_stock(<em>ticker</em>, <em>quantity</em>)</h4>
+
+<p>Method to buy a stock. An error will be thrown if you attempt to buy more shares than what your funds allow you to.</p>
+
+<p><strong>ticker</strong> - a <code>string</code> specifying the ticker symbol, e.g <code>"AAPL"</code>.
+<strong>quantity</strong> - an <code>int</code> specifying the number of shares to buy.</p>
+
+<h4 id="_classmethod_accountsell_stock_ticker__quantity_"><em>classmethod</em> Account.sell_stock(<em>ticker</em>, <em>quantity</em>)</h4>
+
+<p>Method to sell a stock. An error will be thrown if you attempt to sell a stock that you do not own, or attempt to sell too much of a stock.</p>
+
+<p><strong>ticker</strong> - a <code>string</code> specifying the ticker symbol, e.g <code>"AAPL"</code>.
+<strong>quantity</strong> - an <code>int</code> specifying the number of shares to buy. Alternatively, you can pass the string <code>"all"</code> to sell all the stock you own of that ticker.</p>
+
+<h4 id="_classmethod_accounttrailing_stop_ticker__quantity__points__percentagefalse_"><em>classmethod</em> Account.trailing_stop(<em>ticker</em>, <em>quantity</em>, <em>points</em>[, <em>percentage=False</em>])</h4>
+
+<p>Method to set a trailing stop order on a stock, selling it when it goes below a certain point. A more detailed explanation of how a trailing stop works can be found <a href="http://www.investopedia.com/terms/t/trailingstop.asp">here</a>.</p>
+
+<p><strong>ticker</strong> - a <code>string</code> specifying the stock to place the order on. E.g <code>"AAPL"</code>.
+<strong>quantity</strong> - an <code>int</code> specifying the amount of stock to sell.
+<strong>points</strong> - a <code>float</code> sepcifying the number of points that the stock can fall before the sell order executing. For example, setting this to <code>1</code> would mean that a stock priced at <code>101</code> would sell if it dropped to <code>100</code>.
+<strong>percentage</strong> - optional, defaults to <code>False</code>. Indicates whether the <strong>points</strong> parameter should be treated as a percentage or not i.e the stock would need to fall by the percentage specified for it to sell.</p>
+
+<p><em><strong>Note</strong></em>: If you attempt to place two trailing stop orders on the same stock, they will be merged into one - the latest one placed.</p>
+
+<p>Examples using the previous methods:</p>
+
+<pre><code class="python language-python"># Note: all the operations that the account can do only work inside the algorithm inside PyAlgosim (it does not have the relevant data if used outside of PyAlgosim). However, they are shown outside of PyAlgosim here for illustration purposes.
+
+import PyBank
+
+account = PyBank.Account()
+
+# buy 100 shares of Apple
+account.buy_stock("AAPL", 100)
+
+# sell those 100 shares - way #1
+account.sell_stock("AAPL", 100)
+# sell those 100 shares - way #2
+account.sell_stock("AAPL", "all")
+
+
+account.buy_stock("AAPL", 100)
+# this indicates the account to sell the stock if it drops 5% in price.
+account.trailing_stop("AAPL", 100, 5, percentage=True)
+</code></pre>
+
+<h4 id="_classmethod_accountsell_all"><em>classmethod</em> Account.sell_all()</h4>
+
+<p>Sells all the stocks owned.</p>
+
+<h4 id="_classmethod_accountreportverbosefalse"><em>classmethod</em> Account.report([verbose=False])</h4>
+
+<p>Print out a report to the console on the trading activities of the account at that moment in time. It presents information such as the total return (based on the value of stocks held and funds in the account), average market return during that same time period, and number of transactions. If <strong>verbose</strong> is set to <code>True</code>, each stock currently owned by the account is printed to the console, with the average profit made reported on each one.</p>
+
+<h1 id="pyalgosimandpybankputtingittogether">PyAlgosim and PyBank: putting it together</h1>
+
+<p>The two modules are used in conjunction to perform backtesting on algorithms. The following examples will illustrate how to do this.</p>
+
+<h2 id="creatingatradingalgorithm">Creating a trading algorithm</h2>
+
+<p>When creating your trading algorithm, you must keep a few things in mind for everything to work properly. Specifically,</p>
+
+<ul>
+<li>Always checking whether you have enough money to buy the stock.</li>
+
+<li>Correctly using the data provided.</li>
+
+<li>Understand how the <code>variables</code> dictionary works</li>
+</ul>
+
+<p>If you make a purchase which you don't have enough money for, the program will raise an error and stop. For your trading strategy to work, you do not want this. Furthermore, you should keep in mind how the backtesting works. The trading algorithm runs separately for each stock (it will only have access to one ticker at a time). When the trading algorithm begins running on any one of the tickers, the template dictionary variable (if provided) will be available to the algorithm. This variable is <strong>separate</strong> for each stock - you will not have access to the variable dictionary of other stocks.</p>
+
+<pre><code class="python language-python">import PyBank
+import PyAlgosim
+
+# template dictionary for variables
+myvariables = {
+    "high" : float("-inf"),
+    "low" : float("inf")
+}
+
+account = PyBank.Account()
+backtester = PyAlgosim.PyAlgosim(account, variables=myvariables)
+
+# this is an example of keeping track of highs and lows in the variables dictionary
+def myalgorithm(stock, account, variables):
+    # keep track of highs and lows
+    if stock["price"] &gt; variables["high"]:
+        variables["high"] = stock["price"]
+
+    if stock["price"] &lt; variables["low"]:
+        variables["low"] = stock["price"]
+
+    # buy stock if not owned
+    if (stock["ticker"] not in account.stocks_owned) and (account.funds - (stock["price"] + account.TRANSACTION_FEE) &gt;= 0):
+        account.buy_stock(stock["ticker"], 1)
+
+# backtest algorithm
+backtester.simulate(myalgorithm)
+
+# print report of account
+account.report()
+</code></pre>
+
+<h1 id="contributing">Contributing</h1>
+
+<p>PyAlgosim is completely opensource, licensed under the <a href="https://opensource.org/licenses/MIT">MIT License</a>. If you find any bugs, or have new ideas to extend the software, please do! Create a new issue or pull request and it will be reviewed.</p>
+
         </div>
+
       </div>
     </div>
-    <div class="footer-copyright">
-      <div class="container">
-        <p id="copyright-notice" class="white-text"></p>
+  </div>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+
+        <div class="col s12">
+          <ul>
+            <li>
+              <a href="getting-started.html">Getting started</a>
+            </li>
+            <li>
+              <a href="docs.html">Documentation</a>
+            </li>
+            <li>
+              <a href="contact.html">Contact</a>
+            </li>
+            <li>
+              <a href="https://github.com/DHDaniel/PyAlgosim/releases/latest">Download</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col s12">
+          <p id="copyright">
+            Copyright (c) 2017 Daniel Hernández under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.
+          </p>
+        </div>
+
       </div>
     </div>
   </footer>
 
+
+    <script src="js/jquery-2.2.0.js" type="text/javascript"></script>
+    <script src="js/materialize.min.js" type="text/javascript"></script>
+
+    <!-- Loading and initializing syntax highlighter -->
+    <script src="js/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="js/TweenMax.min.js" type="text/javascript"></script>
+    <script src="js/scrollmagic/uncompressed/ScrollMagic.js" type="text/javascript"></script>
+    <script src="js/scrollmagic/uncompressed/plugins/animation.gsap.js" type="text/javascript"></script>
+    <script src="js/scrollmagic/uncompressed/plugins/debug.addIndicators.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
 </body>
 
 </html>

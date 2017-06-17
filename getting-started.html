@@ -3,135 +3,159 @@
 
 <head>
 
-  <title>PyAlgosim - Getting Started</title>
+  <title>Getting started - PyAlgosim</title>
 
   <!-- Tag for better mobile display -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <meta name="description" content="PyAlgosim - A simple Python-built backtester for algorithmic stock trading.">
 
-  <link href="css/materialize.min.css" type="text/css" rel="stylesheet"/>
-  <!-- For code markup -->
-  <link href="css/prism.css" type="text/css" rel="stylesheet"/>
-  <link href="css/styles.css" type="text/css" rel="stylesheet"/>
+  <link href="stylesheets/materialize.min.css" type="text/css" rel="stylesheet"/>
 
-  <!-- Google Material Design icons -->
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
 
-  <script src="js/jquery-2.2.0.js" type="text/javascript"></script>
-  <script src="js/materialize.min.js" type="text/javascript"></script>
-  <script src="js/prism.js" type="text/javascript"></script>
-  <script src="js/script.js" type="text/javascript"></script>
+  <link rel="stylesheet" href="stylesheets/highlight/dracula.css">
+
+  <link href="stylesheets/styles.css" type="text/css" rel="stylesheet"/>
 
 </head>
 
 <body>
 
-  <header>
-    <div class="navbar-fixed">
-      <nav class="orange">
-        <div class="container">
-          <div class="nav-wrapper">
-            <a href="index.html" class="brand-logo"><span class="light-blue-text">Py</span>Algosim</a>
-            <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
-            <ul class="right hide-on-med-and-down">
-              <li class="active"><a href="getting-started.html">Getting started</a></li>
-              <li><a href="docs.html">Docs</a></li>
-              <li><a href="examples.html">Examples</a></li>
-              <li><a href="https://github.com/DHDaniel/PyAlgosim/releases" class="btn light-blue">Download</a></li>
-            </ul>
-            <ul class="side-nav light-blue" id="mobile-nav">
-              <li><a href="getting-started.html">Getting started</a></li>
-              <li><a href="docs.html">Docs</a></li>
-              <li><a href="examples.html">Examples</a></li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-    </div>
+  <nav id="navbar">
+    <a href="/" id="logo"><img src="images/paslogo.svg" /></a>
+    <ul>
+      <li>
+        <a href="getting-started.html">Getting started</a>
+      </li>
+      <li>
+        <a href="docs.html">Documentation</a>
+      </li>
+      <li>
+        <a href="contact.html">Contact</a>
+      </li>
+      <li>
+        <a href="https://github.com/DHDaniel/PyAlgosim/releases/latest" class="btn waves-effect waves-light">Download</a>
+      </li>
+    </ul>
+    <button id="menu-toggle" class="hide-on-desktop"><i class="fa fa-bars" aria-hidden="true"></i></button>
+  </nav>
+
+  <header id="top-banner">
+    <h1>Getting started</h1>
   </header>
 
-  <main>
-    <div class="container">
-
-      <div class="page-header">
-        <h1 class="light-blue-text">Getting started</h1>
-        <h4 class="light-blue-text">It's quick, simple and easy.</h4>
-      </div>
-
-      <nav class="light-blue">
-        <div class="nav-wrapper breadcrumb-wrapper">
-          <div class="col s12">
-            <a class="breadcrumb" href="index.html">Home</a>
-            <a class="breadcrumb" href="getting-started.html">Getting started</a>
-          </div>
-        </div>
-      </nav>
-
-      <div class="page-content">
-
-        <p>The first thing you must do on downloading the software is, from the command line (or using any method you want) navigate to the <code class="language-bash">utilities_and_modules</code> folder</p>
-
-        <pre><code class="language-bash">
-  $ cd /path/to/PyAlgosim/
-  $ cd utilities_and_modules
-            </code></pre>
-
-        <p>From that folder, run the Python program <code class="language-bash">scraper_init.py</code>.</p>
-
-        <pre><code class="language-bash">
-  $ python scraper_init.py
-        </code></pre>
-
-        <p>Running this program is necessary to create the database <code class="language-bash">stocks.db</code>, which the program <strong>will communicate with</strong>. This database does not come with the software because it is a large file, and for the sake of saving space it was not uploaded to GitHub.</p>
-
-        <h3 class="light-blue-text">Trading algorithm</h3>
-
-        <p>Once you have created the <code class="language-bash">stocks.db</code> file, you are ready to go. In the <code class="language-bash">pysimcode.py</code> file, in the main folder, is where all your algorithms and code will go. Open the file using your favourite text editor, and you will see some source code with two functions: <code class="language-bash">main()</code> and <code class="language-bash">init()</code>.</p>
-
-        <p><strong>The <code class="language-bash">init()</code> function:</strong> the purpose of this function is to initialise any variables that you may want to use during your algorithm that are not already provided. You can store these variables in the dictionary returned by this function. For example, if you wanted to keep track of the lowest ever price of the stock, you could create an entry in the dictionary under the key <code class="language-bash">"lowest"</code>, and initialise it to <code class="language-bash">0</code> in the <code class="language-bash">init()</code> function. This function is called once for every separate stock - this means these variables will be different for each ticker.</p>
-
-        <p><strong>The <code class="language-bash">main()</code> function:</strong> the <code class="language-bash">main()</code> function is what gets executed every day for each ticker. It contains the main algorithm and logic of your trading strategy. All the variables that are available for use are in the comments of the <code class="language-bash">pysimcode.py</code> file, and they are also described there. You can access the optional variables that you have created using the <code class="language-bash">optional_variables</code> variable, and looping through it (it is a dictionary).</p>
-
-        <h3 class="light-blue-text">Backtesting</h3>
-
-        <p>
-          Once you have included everything you want to in the <code class="language-bash">main()</code> and <code class="language-bash">init()</code> functions, you can run the <code class="language-bash">pysim.py</code> program (not the pysimcode.py file), like so:
-
-          <pre>
-            <code class="language-bash">
-$ python pysim.py
-            </code>
-          </pre>
-
-It will backtest every single stock in the S&amp;P 500 from 1998 to 2013 using the algorithm you have provided, and will then print out the result of your trades.
-        </p>
-
-      </div>
-
-    </div>
-  </main>
-
-  <footer class="page-footer orange">
+  <div id="content">
     <div class="container">
       <div class="row">
-        <div class="col s12 m6">
+        <div class="col s12 m8">
+          <h4>The Python-built algorithmic backtester</h4>
+
+          <p>PyAlgosim provides a simple way for amateur algorithmic traders to get a feel for automated trading. It is meant to be simple to use, and quick to produce results. We are always accepting contributions and suggestions to make the software better!</p>
+
+          <p>PyAlgosim allows you to backtest trading strategies accross S&amp;P 500 data from <strong>January 2nd, 1998</strong> to <strong>August 8th, 2013</strong>!</p>
+
+          <p>To get started using the PyAlgosim algorithmic trading backtester, you must download the most recent version of the software. You can easily do this by either cloning the repository from GitHub <a href="https://github.com/DHDaniel/PyAlgosim">here</a> or directly download the latest release from <a href="https://github.com/DHDaniel/PyAlgosim/releases">here</a>.</p>
+
+          <h2 id="requirements">Requirements</h2>
+
+          <p>All that is required to start using PyAlgosim is:</p>
+
           <ul>
-            <li><a href="docs.html" class="white-text">Documentation</a></li>
-            <li><a href="getting-started.html" class="white-text">Getting started</a></li>
-            <li><a href="examples.html" class="white-text">Examples</a></li>
-            <li><a href="https://github.com/DHDaniel/PyAlgosim" class="white-text">GitHub</a></li>
-            <li><a href="https://github.com/DHDaniel/PyAlgosim/releases" class="white-text">Download</a></li>
+          <li>Python 2.7.X</li>
           </ul>
+
+          <h2 id="projectstructure">Project structure</h2>
+
+          <p>On downloading, the project has a very specific structure that you should keep for everything to work as intended. Alternatively, you could set up your own structure, but it would require additional configuration (and would probably be a pain). After initialization, the project structure should look like this:</p>
+
+          <pre><code class="bash language-bash">.
+├── LICENSE
+├── PyBank.py
+├── PyAlgosim.py
+├── README.md
+├── raw_data/
+├── tests/
+└── utils/
+    ├── __init__.py
+    ├── initialize.py
+    ├── reset.py
+    ├── stocks.db
+    └── tickers.json
+          </code></pre>
+
+          <p>What's inside <code>tests/</code> and <code>raw_data/</code> is not very important. However, note that the <code>initialize.py</code> script accesses the <code>raw_data/</code> directory to build the database, so you should keep this structure as is.</p>
+
+          <p>For PyAlgosim to work, the project structure <strong>should stay like this</strong>. If you move the <code>stocks.db</code> file or the <code>tickers.json</code> file, you will need to reference them during the creation of a PyAlgosim object.</p>
+
+          <p>The program in which you wish to use the <code>PyAlgosim</code> and <code>PyBank</code> modules in should ideally reside in the top-level directory of the project (that is, in the same directory as the PyBank and PyAlgosim files) for everything to run as smoothly as possible.</p>
+
+          <h2 id="initialization">Initialization</h2>
+
+<p>To get PyAlgosim working, you must initialize the project from the directory in which you have placed it. <strong>All the backtesting that you wish to do should be done from within this directory</strong>, as specified later on in the documentation.</p>
+
+<p>Initialization is required to create the database file which will hold all the stock information, and to create the ticker list that the backtester will use throughout the simulations. To initialize PyAlgosim, go to the command line and type the following commands:</p>
+
+<pre><code class="bash language-bash">$ cd ~/path/to/PyAlgosim
+$ cd ./utils/
+$ python initialize.py
+</code></pre>
+
+<p>That should run the initialization script, which will use the <code>raw_data</code> directory to generate the required files. Once it is done, you can start using PyAlgosim!</p>
+
+<h3 id="whyisinitializationnecessary">Why is initialization necessary?</h3>
+
+<p>The database file that PyAlgosim uses to backtest algorithms is too big to upload to GitHub, so the project generates the database file during initialization, using raw .csv files which are much smaller.</p>
+
+        <a href="docs.html" class="btn waves-effect waves-light">Go on to the documentation</a>
         </div>
       </div>
     </div>
-    <div class="footer-copyright">
-      <div class="container">
-        <p id="copyright-notice" class="white-text"></p>
+  </div>
+
+  <footer id="footer">
+    <div class="container">
+      <div class="row">
+
+        <div class="col s12">
+          <ul>
+            <li>
+              <a href="getting-started.html">Getting started</a>
+            </li>
+            <li>
+              <a href="docs.html">Documentation</a>
+            </li>
+            <li>
+              <a href="contact.html">Contact</a>
+            </li>
+            <li>
+              <a href="https://github.com/DHDaniel/PyAlgosim/releases/latest">Download</a>
+            </li>
+          </ul>
+        </div>
+        <div class="col s12">
+          <p id="copyright">
+            Copyright (c) 2017 Daniel Hernández under the <a href="https://opensource.org/licenses/MIT">MIT License</a>.
+          </p>
+        </div>
+
       </div>
     </div>
   </footer>
 
+
+    <script src="js/jquery-2.2.0.js" type="text/javascript"></script>
+    <script src="js/materialize.min.js" type="text/javascript"></script>
+
+    <!-- Loading and initializing syntax highlighter -->
+    <script src="js/highlight/highlight.pack.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
+
+    <script src="js/TweenMax.min.js" type="text/javascript"></script>
+    <script src="js/scrollmagic/uncompressed/ScrollMagic.js" type="text/javascript"></script>
+    <script src="js/scrollmagic/uncompressed/plugins/animation.gsap.js" type="text/javascript"></script>
+    <script src="js/scrollmagic/uncompressed/plugins/debug.addIndicators.js" type="text/javascript"></script>
+    <script src="js/main.js" type="text/javascript"></script>
 </body>
 
 </html>
