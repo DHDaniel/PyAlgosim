@@ -124,6 +124,13 @@ $("#menu-toggle").click(function () {
 
 module.exports = function (controller) {
 
+  const windowWidth = $(window).width();
+  // early return if on mobile, because the animation is buggy on there.
+  if (windowWidth < 768) {
+    console.log("Exiting on mobile...");
+    return;
+  }
+
   try {
 
     var $title = $("#top-banner h1");
