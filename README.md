@@ -47,7 +47,7 @@ What's inside `tests/` and `raw_data/` is not very important. However, note that
 
 For PyAlgosim to work, the project structure **should stay like this**. If you move the `stocks.db` file or the `tickers.json` file, you will need to reference them during the creation of a PyAlgosim object.
 
-The program in which you wish to use the `PyAlgosim` and `PyBank` modules in should ideally reside in the top-level directory of the project (that is, in the same directory as the PyBank and PyAlgosim files) for everything to run as smoothly as possible.
+The program in which you wish to use the `PyAlgosim` and `PyBank` modules should ideally reside in the top-level directory of the project (that is, in the same directory as the PyBank and PyAlgosim files) for everything to run as smoothly as possible.
 
 ## Initialization
 To get PyAlgosim working, you must initialize the project from the directory in which you have placed it. **All the backtesting that you wish to do should be done from within this directory**, as specified later on in the documentation.
