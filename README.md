@@ -1,6 +1,6 @@
 # [PyAlgosim](http://dhdaniel.github.io/PyAlgosim/)
-#### The Python-built algorithmic backtester
-PyAlgosim provides a simple way for amateur algorithmic traders to get a feel for automated trading. It is meant to be simple to use, and quick to produce results. We are always accepting contributions and suggestions to make the software better!
+#### The Python-built high frequency trading backtester
+PyAlgosim provides a simple way for amateur high frequency traders to get a feel for automated trading. It is meant to be simple to use, and quick to produce results. We are always accepting contributions and suggestions to make the software better!
 
 PyAlgosim allows you to backtest trading strategies accross S&P 500 data from **January 2nd, 1998** to **August 8th, 2013**!
 
@@ -19,7 +19,7 @@ Quick links to parts of the documentation:
 - [Contributing](#contributing)
 
 # Getting started
-To get started using the PyAlgosim algorithmic trading backtester, you must download the most recent version of the software. You can easily do this by either cloning the repository from GitHub [here](https://github.com/DHDaniel/PyAlgosim) or directly download the latest release from [here](https://github.com/DHDaniel/PyAlgosim/releases).
+To get started using the PyAlgosim high frequency trading backtester, you must download the most recent version of the software. You can easily do this by either cloning the repository from GitHub [here](https://github.com/DHDaniel/PyAlgosim) or directly download the latest release from [here](https://github.com/DHDaniel/PyAlgosim/releases).
 
 ## Requirements
 All that is required to start using PyAlgosim is:
